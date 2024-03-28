@@ -1,30 +1,48 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface NoteEditorProps {
   setNewNoteTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const NoteEditor = (props: NoteEditorProps) => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  const [content, setContent] = useState('');
+  const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
 
   useEffect(() => {
     if (titleRef.current) {
       titleRef.current.focus();
-
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(titleRef.current);
-      range.collapse(false);
-      selection?.removeAllRanges();
-      selection?.addRange(range);
+      titleRef.current.selectionStart = titleRef.current.selectionEnd = titleRef.current.value.length;
     }
   }, []);
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLHeadingElement>) => {
-    if (e.target.textContent === '') return props.setNewNoteTitle('Untitled');
-    props.setNewNoteTitle(e.target.textContent || '');
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '') return props.setNewNoteTitle('Untitled');
+    props.setNewNoteTitle(e.target.value || '');
   }
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value || '');
+  }
+
+  const handleContentFocus = () => {
+    setIsPlaceholderVisible(false);
+  }
+
+  const adjustTextareaHeight = () => {
+    if (contentRef.current) {
+      contentRef.current.style.height = 'auto'; // Reset height
+      contentRef.current.style.height = `${contentRef.current.scrollHeight}px`; // Set height to scrollHeight
+    }
+  };
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [content]);
+
 
   return (
     <div className='flex-1 flex-col p-4'>
@@ -35,13 +53,22 @@ const NoteEditor = (props: NoteEditorProps) => {
           <svg className='swap-off fill-current w-7 h-7' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z' /></svg>
         </label>
       </div>
-      <div className='px-40 py-24'>
-        <h1
+      <div className='flex flex-col pl-40 pr-80 py-24'>
+        <input
           ref={titleRef}
-          className='text-4xl outline-none'
-          contentEditable
-          onInput={handleTitleChange}
-        >Untitled</h1>
+          defaultValue={'Untitled'}
+          type='text'
+          className='bg-inherit text-4xl outline-none'
+          onChange={handleTitleChange}
+        />
+        <textarea
+          ref={contentRef}
+          className={`bg-inherit resize-none outline-none mt-4 ${isPlaceholderVisible ? 'text-accent' : ''}`}
+          onFocus={handleContentFocus}
+          onBlur={() => setIsPlaceholderVisible(content === '')}
+          value={isPlaceholderVisible ? 'Start typing...' : content}
+          onChange={handleContentChange}
+        />
       </div>
     </div>
   );
