@@ -45,10 +45,15 @@ const NoteEditor = (props: NoteEditorProps) => {
   };
 
   useEffect(() => {
+    if (content != '') setIsPlaceholderVisible(false);
+    contentRef.current!.value = content;
+    adjustTextareaHeight();
+  }, [content, contentRef]);
+
+  useEffect(() => {
     adjustTextareaHeight();
     console.log(content);
   }, [content, isEditingMode]);
-
 
   return (
     <div className='ml-56 flex-1 flex-col p-2'>
