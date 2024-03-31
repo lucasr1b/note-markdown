@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body, html {
+  @apply text-white
+}
+
+/* Styles for .note-display */
+
+.note-display a {
+  @apply text-secondary underline;
+}
+
+.note-display blockquote {
+  @apply border-l-4 border-accent italic pl-4 my-4;
+}
+
+.note-display code {
+  @apply bg-accent text-inherit px-2 py-1 rounded;
+}
+
+.note-display em {
+  @apply italic;
+}
+
+.note-display h1 {
+  @apply text-3xl font-bold;
+}
+
+.note-display h2 {
+  @apply text-2xl font-bold;
+}
+
+.note-display h3 {
+  @apply text-xl font-bold;
+}
+
+.note-display h4 {
+  @apply text-lg font-bold;
+}
+
+.note-display h5 {
+  @apply text-base font-bold;
+}
+
+.note-display h6 {
+  @apply text-sm font-bold;
+}
+
+.note-display hr {
+  @apply border-t border-accent my-4;
+}
+
+.note-display img {
+  @apply w-full my-4;
+}
+
+.note-display ul {
+  @apply list-disc ml-4 my-4;
+}
+
+.note-display ol {
+  @apply list-decimal ml-4 my-4;
+}
+
+.note-display p {
+  @apply my-4;
+}
+
+.note-display pre {
+  @apply bg-accent p-4 rounded;
+}
+
+.note-display strong {
+  @apply font-bold;
+}

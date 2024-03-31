@@ -22,7 +22,7 @@ const config: Config = {
 
           "primary": "#4f46e5",
 
-          "secondary": "#733bed",
+          "secondary": "#5e63ff",
 
           "accent": "#514d4b",
 

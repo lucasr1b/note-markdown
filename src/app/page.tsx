@@ -8,7 +8,7 @@ const HomePage = () => {
 
   return (
     <main className='flex min-h-screen bg-base-300'>
-      <ul className='menu bg-base-200 w-56 border-r-2 border-base-100'>
+      <ul className='menu fixed w-56 h-screen bg-base-200 border-r-2 border-base-100 gap-1'>
         <div className='p-2 flex items-center gap-2'>
           <div className='bg-base-300 rounded-lg py-1 px-2 w-fit'>NM</div>
           <h1 className='font-bold'>NoteMarkdown</h1>
