@@ -70,9 +70,9 @@ const NoteEditor = (props: NoteEditorProps) => {
           <>
             <input
               ref={titleRef}
-              defaultValue={'Untitled'}
+              placeholder={'Untitled'}
               type='text'
-              className='bg-inherit text-4xl font-bold mb-1 outline-none'
+              className='bg-inherit text-4xl font-bold mb-1 outline-none placeholder:text-accent'
               onChange={handleTitleChange}
             />
             <textarea
