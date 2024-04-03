@@ -2,76 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles */
 body, html {
-  @apply text-white
+  @apply text-white;
 }
 
-/* Styles for .note-display */
+/* Note Display styles */
+.note-display {
+  h1, h2, h3, h4, h5, h6 {
+    @apply mt-8 font-bold;
+  }
 
-.note-display a {
-  @apply text-secondary underline;
-}
+  a {
+    @apply text-secondary underline;
+  }
 
-.note-display blockquote {
-  @apply border-l-4 border-accent italic pl-4 my-4;
-}
+  blockquote {
+    @apply border-l-4 border-accent italic pl-4 my-4;
+  }
 
-.note-display code {
-  @apply bg-accent text-inherit px-2 py-1 rounded;
-}
+  code {
+    @apply bg-code text-inherit px-2 py-0.5 rounded;
+  }
 
-.note-display em {
-  @apply italic;
-}
+  em {
+    @apply italic;
+  }
 
-.note-display h1 {
-  @apply text-3xl font-bold;
-}
+  h1 {
+    @apply text-3xl;
+  }
 
-.note-display h2 {
-  @apply text-2xl font-bold;
-}
+  h2 {
+    @apply text-2xl;
+  }
 
-.note-display h3 {
-  @apply text-xl font-bold;
-}
+  h3 {
+    @apply text-xl;
+  }
 
-.note-display h4 {
-  @apply text-lg font-bold;
-}
+  h4 {
+    @apply text-lg;
+  }
 
-.note-display h5 {
-  @apply text-base font-bold;
-}
+  h5 {
+    @apply text-base;
+  }
 
-.note-display h6 {
-  @apply text-sm font-bold;
-}
+  h6 {
+    @apply text-sm;
+  }
 
-.note-display hr {
-  @apply border-t border-accent my-4;
-}
+  hr {
+    @apply border-t border-accent my-4;
+  }
 
-.note-display img {
-  @apply w-full my-4;
-}
+  img {
+    @apply w-full my-4;
+  }
 
-.note-display ul {
-  @apply list-disc ml-4 my-4;
-}
+  ul {
+    @apply list-disc ml-6 my-2;
+  }
 
-.note-display ol {
-  @apply list-decimal ml-4 my-4;
-}
+  li {
+    @apply my-2;
+  }
 
-.note-display p {
-  @apply my-4;
-}
+  ol {
+    @apply list-decimal ml-4 my-4;
+  }
 
-.note-display pre {
-  @apply bg-accent p-4 rounded;
-}
+  p {
+    @apply my-2;
+  }
 
-.note-display strong {
-  @apply font-bold;
+  pre {
+    @apply bg-code p-4 rounded;
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  table {
+    @apply w-fit border-collapse border border-table;
+  }
+
+  th {
+    @apply bg-code;
+  }
+
+  th, td {
+    @apply border border-table py-2 px-4;
+    @apply text-left !important;
+  }
 }

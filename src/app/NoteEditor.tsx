@@ -2,6 +2,7 @@
 import { BookOpenIcon, PencilIcon } from '@heroicons/react/16/solid';
 import { useEffect, useRef, useState } from 'react';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import MarkdownSample from './markdownSample';
 
 interface NoteEditorProps {
@@ -71,7 +72,7 @@ const NoteEditor = (props: NoteEditorProps) => {
               ref={titleRef}
               defaultValue={'Untitled'}
               type='text'
-              className='bg-inherit text-4xl font-bold outline-none'
+              className='bg-inherit text-4xl font-bold mb-1 outline-none'
               onChange={handleTitleChange}
             />
             <textarea
@@ -85,8 +86,8 @@ const NoteEditor = (props: NoteEditorProps) => {
           </>
         ) : (
           <>
-            <p className='text-4xl font-bold'>Untitled</p>
-            <div className='note-display bg-inherit'><Markdown>{content}</Markdown></div>
+            <p className='text-4xl font-bold mb-1'>Untitled</p>
+            <div className='note-display bg-inherit'><Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown></div>
           </>
         )}
       </div>
