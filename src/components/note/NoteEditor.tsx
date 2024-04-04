@@ -22,11 +22,11 @@ const NoteEditor = (props: NoteEditorProps) => {
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') return props.setTitle('Untitled');
-    props.setTitle(e.target.value || '');
+    props.setTitle(e.target.value);
   }
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    props.setContent(e.target.value || '');
+    props.setContent(e.target.value);
   }
 
   const handleContentFocus = () => {

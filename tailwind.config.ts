@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "code": "#404040",
+        "code": "#454545",
         "table": "#808080",
       },
     },

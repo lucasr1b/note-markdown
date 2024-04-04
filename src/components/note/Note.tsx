@@ -8,10 +8,11 @@ import NoteEditor from './NoteEditor';
 interface NoteEditorProps {
   newNoteTitle: string;
   setNewNoteTitle: React.Dispatch<React.SetStateAction<string>>;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Note = (props: NoteEditorProps) => {
-  const [content, setContent] = useState(MarkdownSample);
   const [isEditingMode, setIsEditingMode] = useState(true);
 
   return (
@@ -25,9 +26,9 @@ const Note = (props: NoteEditorProps) => {
       </div>
       <div className='flex flex-col px-60 py-32'>
         {isEditingMode ?
-          <NoteEditor title={props.newNoteTitle} setTitle={props.setNewNoteTitle} content={content} setContent={setContent} />
+          <NoteEditor title={props.newNoteTitle} setTitle={props.setNewNoteTitle} content={props.content} setContent={props.setContent} />
           :
-          <NoteDisplay title={props.newNoteTitle} content={content} />
+          <NoteDisplay title={props.newNoteTitle} content={props.content} />
         }
       </div>
     </div>

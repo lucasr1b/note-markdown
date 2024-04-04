@@ -1,5 +1,6 @@
 import { TrashIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface SidebarProps {
@@ -9,7 +10,7 @@ interface SidebarProps {
 const Sidebar = (props: SidebarProps) => {
 
   const [notes, setNotes] = useState<any>([]);
-
+  const [selectedNoteId, setSelectedNoteId] = useState<any>(null);
 
   const fetchNotes = async () => {
     const fetchedNotes = await axios.get('/api/notes');
@@ -28,6 +29,8 @@ const Sidebar = (props: SidebarProps) => {
 
   useEffect(() => {
     fetchNotes();
+
+    setSelectedNoteId(window.location.pathname.split('/').pop());
   }, []);
 
   return (
@@ -39,21 +42,22 @@ const Sidebar = (props: SidebarProps) => {
       <li className='btn btn-sm h-10 btn-primary mt-2 mb-8' onClick={newNote}>
         Create new note
       </li>
-      <li>
-        <a className='active flex justify-between items-center h-10 group hover:cursor-pointer'>
+      {/* <li>
+        <Link className={`flex justify-between items-center h-10 group ${selectedNoteId === null ? 'active' : ''}`} onClick={() => setSelectedNoteId(null)} href={'/notes'}>
           {props.newNoteTitle}
           <div className='hidden group-hover:block p-1 rounded hover:bg-code'>
             <TrashIcon className='w-4 h-4 text-white opacity-75' />
           </div>
-        </a>
-      </li>
+        </Link>
+      </li> */}
       {notes.map((note: any) => (
         <li key={note._id}>
-          <a className='flex justify-between items-center h-10 group'>
+          <Link className={`flex justify-between items-center h-10 group ${selectedNoteId === note._id ? 'active' : ''}`} href={`/notes/${note._id}`} onClick={() => setSelectedNoteId(note._id)}>
             {note.title}
             <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={() => deleteNote(note._id)}>
               <TrashIcon className='w-4 h-4 text-white opacity-75' />
-            </div></a>
+            </div>
+          </Link>
         </li>
       ))}
     </ul>
