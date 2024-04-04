@@ -1,10 +1,13 @@
+import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 
 interface NoteEditorProps {
+  id: string;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
+  setNotes: any;
 };
 
 const NoteEditor = (props: NoteEditorProps) => {
@@ -20,9 +23,22 @@ const NoteEditor = (props: NoteEditorProps) => {
     }
   }, []);
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') return props.setTitle('Untitled');
     props.setTitle(e.target.value);
+
+    // update notes title in notes state for specific note by _id from url params
+    props.setNotes((prevNotes: any) => {
+      const updatedNotes = prevNotes.map((note: any) => {
+        if (note._id === props.id) {
+          note.title = e.target.value;
+        }
+        return note;
+      });
+      return updatedNotes;
+    });
+
+    await axios.put(`/api/notes/${props.id}/rename`, { title: e.target.value });
   }
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

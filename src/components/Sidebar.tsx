@@ -5,31 +5,25 @@ import { useEffect, useState } from 'react';
 
 interface SidebarProps {
   newNoteTitle: string;
+  notes: string[];
+  setNotes: any;
 }
 
 const Sidebar = (props: SidebarProps) => {
 
-  const [notes, setNotes] = useState<any>([]);
   const [selectedNoteId, setSelectedNoteId] = useState<any>(null);
-
-  const fetchNotes = async () => {
-    const fetchedNotes = await axios.get('/api/notes');
-    setNotes(fetchedNotes.data);
-  }
 
   const newNote = async () => {
     const note = await axios.post('/api/notes', { userId: '1' });
-    setNotes([...notes, note.data]);
+    props.setNotes([...props.notes, note.data]);
   }
 
   const deleteNote = async (noteId: string) => {
-    setNotes(notes.filter((note: any) => note._id !== noteId));
+    props.setNotes(props.notes.filter((note: any) => note._id !== noteId));
     await axios.delete(`/api/notes/${noteId}`);
   }
 
   useEffect(() => {
-    fetchNotes();
-
     setSelectedNoteId(window.location.pathname.split('/').pop());
   }, []);
 
@@ -50,7 +44,7 @@ const Sidebar = (props: SidebarProps) => {
           </div>
         </Link>
       </li> */}
-      {notes.map((note: any) => (
+      {props.notes.map((note: any) => (
         <li key={note._id}>
           <Link className={`flex justify-between items-center h-10 group ${selectedNoteId === note._id ? 'active' : ''}`} href={`/notes/${note._id}`} onClick={() => setSelectedNoteId(note._id)}>
             {note.title}

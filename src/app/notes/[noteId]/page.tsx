@@ -9,6 +9,16 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState('');
 
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const fetchedNotes = await axios.get('/api/notes');
+      setNotes(fetchedNotes.data);
+    }
+    fetchNotes();
+  }, [])
+
   useEffect(() => {
     const fetchNote = async () => {
       const note = await axios.get(`/api/notes/${params.noteId}`);
@@ -21,8 +31,8 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
 
   return (
     <main className='flex min-h-screen bg-base-300'>
-      <Sidebar newNoteTitle={newNoteTitle} />
-      <Note content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} />
+      <Sidebar notes={notes} setNotes={setNotes} newNoteTitle={newNoteTitle} />
+      <Note id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} />
     </main>
   );
 };

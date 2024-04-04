@@ -6,10 +6,12 @@ import NoteDisplay from './NoteDisplay';
 import NoteEditor from './NoteEditor';
 
 interface NoteEditorProps {
+  id: string;
   newNoteTitle: string;
   setNewNoteTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
+  setNotes: any;
 };
 
 const Note = (props: NoteEditorProps) => {
@@ -26,7 +28,7 @@ const Note = (props: NoteEditorProps) => {
       </div>
       <div className='flex flex-col px-60 py-32'>
         {isEditingMode ?
-          <NoteEditor title={props.newNoteTitle} setTitle={props.setNewNoteTitle} content={props.content} setContent={props.setContent} />
+          <NoteEditor id={props.id} title={props.newNoteTitle} setTitle={props.setNewNoteTitle} content={props.content} setContent={props.setContent} setNotes={props.setNotes} />
           :
           <NoteDisplay title={props.newNoteTitle} content={props.content} />
         }
