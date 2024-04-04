@@ -11,6 +11,6 @@ export async function POST(request: Request) {
 };
 
 export async function GET() {
-  const notes = await Note.find();
+  const notes = await Note.find().select('_id title');
   return new Response(JSON.stringify(notes));
 };
