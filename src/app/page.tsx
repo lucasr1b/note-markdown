@@ -3,7 +3,7 @@ import { useState } from 'react';
 import NoteEditor from '@/components/note/Note';
 import Sidebar from '@/components/Sidebar';
 
-const HomePage = () => {
+const NotesPage = () => {
   const [newNoteTitle, setNewNoteTitle] = useState<string>('Untitled');
 
   return (
@@ -14,4 +14,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default NotesPage;
