@@ -1,3 +1,4 @@
+import { TrashIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -20,6 +21,11 @@ const Sidebar = (props: SidebarProps) => {
     setNotes([...notes, note.data]);
   }
 
+  const deleteNote = async (noteId: string) => {
+    setNotes(notes.filter((note: any) => note._id !== noteId));
+    await axios.delete(`/api/notes/${noteId}`);
+  }
+
   useEffect(() => {
     fetchNotes();
   }, []);
@@ -34,11 +40,20 @@ const Sidebar = (props: SidebarProps) => {
         Create new note
       </li>
       <li>
-        <a className='active'>{props.newNoteTitle}</a>
+        <a className='active flex justify-between items-center h-10 group hover:cursor-pointer'>
+          {props.newNoteTitle}
+          <div className='hidden group-hover:block p-1 rounded hover:bg-code'>
+            <TrashIcon className='w-4 h-4 text-white opacity-75' />
+          </div>
+        </a>
       </li>
       {notes.map((note: any) => (
         <li key={note._id}>
-          <a>{note.title}</a>
+          <a className='flex justify-between items-center h-10 group'>
+            {note.title}
+            <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={() => deleteNote(note._id)}>
+              <TrashIcon className='w-4 h-4 text-white opacity-75' />
+            </div></a>
         </li>
       ))}
     </ul>

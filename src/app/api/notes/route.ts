@@ -13,11 +13,4 @@ export async function POST(request: Request) {
 export async function GET() {
   const notes = await Note.find();
   return new Response(JSON.stringify(notes));
-}
-
-export async function PUT(request: Request) {
-  // update Note model with new content
-  // const data = await request.json();
-  // Note.updateOne({ _id: noteId }, { content: 'Hello, world!' });
-  return new Response('Hello from the API!');
-}
+};
