@@ -33,7 +33,7 @@ const Sidebar = (props: SidebarProps) => {
         <div className='bg-base-300 rounded-lg py-1 px-2 w-fit'>NM</div>
         <h1 className='font-bold'>NoteMarkdown</h1>
       </div>
-      <li className='btn btn-sm h-10 btn-primary mt-2 mb-8' onClick={newNote}>
+      <li className='btn btn-sm h-10 btn-primary mt-2 mb-8 no-animation' onClick={newNote}>
         Create new note
       </li>
       {/* <li>
