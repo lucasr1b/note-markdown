@@ -9,11 +9,12 @@ export async function GET(request: Request, { params }: { params: { noteId: stri
   return new Response(JSON.stringify(note));
 };
 
-export async function PUT(request: Request) {
-  // update Note model with new content
-  // const data = await request.json();
-  // Note.updateOne({ _id: noteId }, { content: 'Hello, world!' });
-  return new Response('Hello from the API!');
+export async function PUT(request: Request, { params }: { params: { noteId: string } }) {
+  const noteId = params.noteId;
+  const data = await request.json();
+  const content = data.content;
+  await Note.updateOne({ _id: noteId }, { content });
+  return new Response('Note updated');
 };
 
 export async function DELETE(request: Request, { params }: { params: { noteId: string } }) {

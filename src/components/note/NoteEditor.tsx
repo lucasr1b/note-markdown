@@ -41,8 +41,9 @@ const NoteEditor = (props: NoteEditorProps) => {
     await axios.put(`/api/notes/${props.id}/rename`, { title: e.target.value });
   }
 
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     props.setContent(e.target.value);
+    await axios.put(`/api/notes/${props.id}`, { content: e.target.value });
   }
 
   const handleContentFocus = () => {
