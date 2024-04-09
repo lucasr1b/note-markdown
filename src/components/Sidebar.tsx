@@ -17,7 +17,8 @@ const Sidebar = (props: SidebarProps) => {
     props.setNotes([...props.notes, note.data]);
   }
 
-  const deleteNote = async (noteId: string) => {
+  const deleteNote = async (e: any, noteId: string) => {
+    e.preventDefault();
     props.setNotes(props.notes.filter((note: any) => note._id !== noteId));
     await axios.delete(`/api/notes/${noteId}`);
   }
@@ -36,19 +37,11 @@ const Sidebar = (props: SidebarProps) => {
       <li className='btn btn-sm h-10 btn-primary mt-2 mb-8 no-animation' onClick={newNote}>
         Create new note
       </li>
-      {/* <li>
-        <Link className={`flex justify-between items-center h-10 group ${selectedNoteId === null ? 'active' : ''}`} onClick={() => setSelectedNoteId(null)} href={'/notes'}>
-          {props.newNoteTitle}
-          <div className='hidden group-hover:block p-1 rounded hover:bg-code'>
-            <TrashIcon className='w-4 h-4 text-white opacity-75' />
-          </div>
-        </Link>
-      </li> */}
       {props.notes.map((note: any) => (
         <li key={note._id}>
           <Link className={`flex justify-between items-center h-10 group ${selectedNoteId === note._id ? 'active' : ''}`} href={`/notes/${note._id}`} onClick={() => setSelectedNoteId(note._id)}>
             {note.title}
-            <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={() => deleteNote(note._id)}>
+            <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
               <TrashIcon className='w-4 h-4 text-white opacity-75' />
             </div>
           </Link>
