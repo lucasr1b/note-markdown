@@ -1,6 +1,16 @@
 import { DocumentPlusIcon } from '@heroicons/react/16/solid';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const NoteHome = () => {
+
+  const { push } = useRouter();
+
+  const newNote = async () => {
+    const note = await axios.post('/api/notes', { userId: '1' });
+    push(`/notes/${note.data._id}`);
+  }
+
   return (
     <div className='ml-56 flex-1 flex-col p-2'>
       <div className='flex flex-col px-60 py-32'>
@@ -8,7 +18,7 @@ const NoteHome = () => {
         <div className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
             <h1 className='text-2xl'>Start</h1>
-            <div className='flex items-center gap-1 p-2 w-fit rounded-md text-secondary hover:bg-base-100 hover:cursor-pointer'>
+            <div className='flex items-center gap-1 p-2 w-fit rounded-md text-secondary hover:bg-base-100 hover:cursor-pointer' onClick={newNote}>
               <DocumentPlusIcon className='w-5 h-5 text-secondary' /> Create a new note...
             </div>
           </div>
