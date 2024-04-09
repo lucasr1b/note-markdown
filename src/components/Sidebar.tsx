@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface SidebarProps {
-  newNoteTitle: string;
   notes: string[];
   setNotes: any;
 }
@@ -24,6 +23,7 @@ const Sidebar = (props: SidebarProps) => {
   }
 
   useEffect(() => {
+    if (window.location.pathname === '/notes') return setSelectedNoteId(null);
     setSelectedNoteId(window.location.pathname.split('/').pop());
   }, []);
 

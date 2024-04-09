@@ -1,17 +1,25 @@
 'use client';
-import { useState } from 'react';
-import Note from '@/components/note/Note';
+import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
-import MarkdownSample from '@/utils/markdownSample';
+import axios from 'axios';
+import NoteHome from '@/components/NoteHome';
 
 const NotesPage = () => {
-  const [newNoteTitle, setNewNoteTitle] = useState<string>('Untitled');
-  const [content, setContent] = useState(MarkdownSample);
+
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const fetchedNotes = await axios.get('/api/notes');
+      setNotes(fetchedNotes.data);
+    }
+    fetchNotes();
+  }, [])
 
   return (
     <main className='flex min-h-screen bg-base-300'>
-      <Sidebar newNoteTitle={newNoteTitle} />
-      <Note content={content} setContent={setContent} newNoteTitle={newNoteTitle} setNewNoteTitle={setNewNoteTitle} />
+      <Sidebar notes={notes} setNotes={setNotes} />
+      <NoteHome />
     </main>
   );
 };

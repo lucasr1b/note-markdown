@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const NotePage = ({ params }: { params: { noteId: string } }) => {
-  const [newNoteTitle, setNewNoteTitle] = useState<string>('Untitled')
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState('');
 
@@ -31,7 +30,7 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
 
   return (
     <main className='flex min-h-screen bg-base-300'>
-      <Sidebar notes={notes} setNotes={setNotes} newNoteTitle={newNoteTitle} />
+      <Sidebar notes={notes} setNotes={setNotes} />
       <Note id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} />
     </main>
   );
