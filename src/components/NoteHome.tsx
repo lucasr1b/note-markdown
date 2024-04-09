@@ -14,7 +14,7 @@ const NoteHome = () => {
   return (
     <div className='ml-56 flex-1 flex-col p-2'>
       <div className='flex flex-col px-60 py-32'>
-        <h1 className='text-4xl font-semibold mb-4'>NoteMarkdown</h1>
+        <h1 className='text-4xl font-semibold mb-8'>NoteMarkdown</h1>
         <div className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
             <h1 className='text-2xl'>Start</h1>
