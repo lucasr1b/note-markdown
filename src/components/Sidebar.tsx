@@ -9,9 +9,6 @@ interface SidebarProps {
 }
 
 const Sidebar = (props: SidebarProps) => {
-
-  const [selectedNoteId, setSelectedNoteId] = useState<any>(null);
-
   const newNote = async () => {
     const note = await axios.post('/api/notes', { userId: '1' });
     props.setNotes([...props.notes, note.data]);
@@ -23,10 +20,9 @@ const Sidebar = (props: SidebarProps) => {
     await axios.delete(`/api/notes/${noteId}`);
   }
 
-  useEffect(() => {
-    if (window.location.pathname === '/notes') return setSelectedNoteId(null);
-    setSelectedNoteId(window.location.pathname.split('/').pop());
-  }, []);
+  const getSelectedNoteId = () => {
+    return window.location.pathname.split('/').pop();
+  }
 
   return (
     <ul className='menu fixed w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
@@ -39,7 +35,7 @@ const Sidebar = (props: SidebarProps) => {
       </li>
       {props.notes.map((note: any) => (
         <li key={note._id}>
-          <Link className={`flex justify-between items-center h-10 group ${selectedNoteId === note._id ? 'active' : ''}`} href={`/notes/${note._id}`} onClick={() => setSelectedNoteId(note._id)}>
+          <Link className={`flex justify-between items-center h-10 group ${getSelectedNoteId() === note._id ? 'active' : ''}`} href={`/notes/${note._id}`}>
             {note.title}
             <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
               <TrashIcon className='w-4 h-4 text-white opacity-75' />
