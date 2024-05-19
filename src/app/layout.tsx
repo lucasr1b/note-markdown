@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
 import './globals.css';
+import { NotesProvider } from '@/context/NotesContext';
 
 const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
@@ -16,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <NotesProvider>
+          {children}
+        </NotesProvider>
+      </body>
     </html>
   );
 }

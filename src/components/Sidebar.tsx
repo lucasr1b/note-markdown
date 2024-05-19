@@ -1,34 +1,29 @@
+'use client';
 import { TrashIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useNotes } from '@/context/NotesContext';
 
-interface SidebarProps {
-  notes: string[];
-  setNotes: any;
-}
-
-const Sidebar = (props: SidebarProps) => {
-
+const Sidebar = () => {
+  const { notes, setNotes } = useNotes();
   const { push } = useRouter();
 
   const getSelectedNoteId = () => {
     return window.location.pathname.split('/').pop();
-  }
+  };
 
   const newNote = async () => {
     const note = await axios.post('/api/notes', { userId: '1' });
-    props.setNotes([...props.notes, note.data]);
-  }
+    setNotes([...notes, note.data]);
+  };
 
   const deleteNote = async (e: any, noteId: string) => {
     if (getSelectedNoteId() === noteId) push('/notes');
     e.preventDefault();
-    props.setNotes(props.notes.filter((note: any) => note._id !== noteId));
+    setNotes(notes.filter((note: any) => note._id !== noteId));
     await axios.delete(`/api/notes/${noteId}`);
-  }
-
-
+  };
 
   return (
     <ul className='menu fixed w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
@@ -39,7 +34,7 @@ const Sidebar = (props: SidebarProps) => {
       <li className='btn btn-sm h-10 btn-primary mt-2 mb-8 no-animation' onClick={newNote}>
         Create new note
       </li>
-      {props.notes.map((note: any) => (
+      {notes.map((note: any) => (
         <li key={note._id}>
           <Link className={`flex justify-between items-center h-10 group ${getSelectedNoteId() === note._id ? 'active' : ''}`} href={`/notes/${note._id}`}>
             {note.title}
