@@ -1,13 +1,15 @@
+import { useNotes } from '@/context/NotesContext';
 import { DocumentPlusIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 const NoteStart = () => {
-
+  const { notes, setNotes, notesLoading } = useNotes();
   const { push } = useRouter();
 
   const newNote = async () => {
     const note = await axios.post('/api/notes', { userId: '1' });
+    setNotes([...notes, note.data]);
     push(`/notes/${note.data._id}`);
   }
 

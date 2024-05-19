@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   const deleteNote = async (e: React.MouseEvent, noteId: string) => {
-    if (getSelectedNoteId() === noteId) push('/notes');
+    if (getSelectedNoteId() === noteId) push('/');
     e.preventDefault();
     setNotes(notes.filter((note) => note._id !== noteId));
     await axios.delete(`/api/notes/${noteId}`);
@@ -27,7 +27,7 @@ const Sidebar = () => {
 
   return (
     <ul className='menu fixed w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
-      <Link className='p-2 flex items-center gap-2' href={'/notes'}>
+      <Link className='p-2 flex items-center gap-2' href={'/'}>
         <div className='bg-base-300 rounded-lg py-1 px-2 w-fit'>NM</div>
         <h1 className='font-bold'>NoteMarkdown</h1>
       </Link>
