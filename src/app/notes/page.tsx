@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/sidebar/Sidebar';
 import axios from 'axios';
 import NoteHome from '@/components/NoteHome';
 
@@ -18,7 +18,7 @@ const NotesPage = () => {
 
   return (
     <main className='flex min-h-screen bg-base-300'>
-      <Sidebar notes={notes} setNotes={setNotes} />
+      <Sidebar />
       <NoteHome />
     </main>
   );

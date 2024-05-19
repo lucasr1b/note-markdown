@@ -1,6 +1,6 @@
 'use client';
 import Note from '@/components/note/Note';
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/sidebar/Sidebar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNotes } from '@/context/NotesContext';

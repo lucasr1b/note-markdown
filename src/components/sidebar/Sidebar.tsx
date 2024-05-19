@@ -1,12 +1,12 @@
 'use client';
-import { TrashIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
+import SidebarItem from './SidebarItem';
 
 const Sidebar = () => {
-  const { notes, setNotes } = useNotes();
+  const { notes, setNotes, notesLoading } = useNotes();
   const { push } = useRouter();
 
   const getSelectedNoteId = () => {
@@ -21,7 +21,7 @@ const Sidebar = () => {
   const deleteNote = async (e: any, noteId: string) => {
     if (getSelectedNoteId() === noteId) push('/notes');
     e.preventDefault();
-    setNotes(notes.filter((note: any) => note._id !== noteId));
+    setNotes(notes.filter((note) => note._id !== noteId));
     await axios.delete(`/api/notes/${noteId}`);
   };
 
@@ -34,16 +34,17 @@ const Sidebar = () => {
       <li className='btn btn-sm h-10 btn-primary mt-2 mb-8 no-animation' onClick={newNote}>
         Create new note
       </li>
-      {notes.map((note: any) => (
-        <li key={note._id}>
-          <Link className={`flex justify-between items-center h-10 group ${getSelectedNoteId() === note._id ? 'active' : ''}`} href={`/notes/${note._id}`}>
-            {note.title}
-            <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
-              <TrashIcon className='w-4 h-4 text-white opacity-75' />
-            </div>
-          </Link>
-        </li>
-      ))}
+      {notesLoading ? (
+        <div className='flex flex-col gap-2'>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className='w-full h-10 leading-relaxed animate-pulse bg-code rounded-md'></div>
+          ))}
+        </div>
+      ) : (
+        notes.map((note) => (
+          <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
+        ))
+      )}
     </ul>
   );
 };

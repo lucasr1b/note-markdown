@@ -11,23 +11,31 @@ interface Note {
 interface NotesContextType {
   notes: Note[];
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+  notesLoading: boolean;
 }
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
 
 export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [notesLoading, setNotesLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const fetchedNotes = await axios.get('/api/notes');
-      setNotes(fetchedNotes.data);
+      try {
+        const fetchedNotes = await axios.get('/api/notes');
+        setNotes(fetchedNotes.data);
+      } catch (error) {
+        console.error('Error fetching notes:', error);
+      } finally {
+        setNotesLoading(false);
+      }
     };
     fetchNotes();
   }, []);
 
   return (
-    <NotesContext.Provider value={{ notes, setNotes }}>
+    <NotesContext.Provider value={{ notes, setNotes, notesLoading }}>
       {children}
     </NotesContext.Provider>
   );
