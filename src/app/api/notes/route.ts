@@ -1,5 +1,5 @@
-import connectToDB from '@/backend/db';
 import Note from '@/backend/models/Note';
+import { connectToDB } from '@/backend/utils/connectToDB';
 
 connectToDB();
 
