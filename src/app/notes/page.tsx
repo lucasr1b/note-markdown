@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/sidebar/Sidebar';
 import axios from 'axios';
-import NoteHome from '@/components/NoteHome';
+import NoteStart from '@/components/NoteStart';
 
-const NotesPage = () => {
+const NoteStartPage = () => {
 
   const [notes, setNotes] = useState([]);
 
@@ -19,9 +19,9 @@ const NotesPage = () => {
   return (
     <main className='flex min-h-screen bg-base-300'>
       <Sidebar />
-      <NoteHome />
+      <NoteStart />
     </main>
   );
 };
 
-export default NotesPage;
+export default NoteStartPage;

@@ -1,21 +1,21 @@
 'use client';
 import { BookOpenIcon, PencilIcon } from '@heroicons/react/16/solid';
 import { useState } from 'react';
-import MarkdownSample from '@/utils/markdownSample';
 import NoteDisplay from './NoteDisplay';
 import NoteEditor from './NoteEditor';
+import { Note } from '@/utils/types';
 
-interface NoteEditorProps {
+type NoteProps = {
   id: string;
   newNoteTitle: string;
   setNewNoteTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
-  setNotes: any;
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
   isLoading: boolean;
 };
 
-const Note = (props: NoteEditorProps) => {
+const NoteItem = (props: NoteProps) => {
   const [isEditingMode, setIsEditingMode] = useState(true);
 
   return (
@@ -63,4 +63,4 @@ const Note = (props: NoteEditorProps) => {
   );
 };
 
-export default Note;
+export default NoteItem;

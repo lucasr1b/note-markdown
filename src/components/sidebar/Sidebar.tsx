@@ -10,7 +10,7 @@ const Sidebar = () => {
   const { push } = useRouter();
 
   const getSelectedNoteId = () => {
-    return window.location.pathname.split('/').pop();
+    return window.location.pathname.split('/').pop() as string;
   };
 
   const newNote = async () => {
@@ -18,7 +18,7 @@ const Sidebar = () => {
     setNotes([...notes, note.data]);
   };
 
-  const deleteNote = async (e: any, noteId: string) => {
+  const deleteNote = async (e: React.MouseEvent, noteId: string) => {
     if (getSelectedNoteId() === noteId) push('/notes');
     e.preventDefault();
     setNotes(notes.filter((note) => note._id !== noteId));

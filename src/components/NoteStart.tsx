@@ -2,7 +2,7 @@ import { DocumentPlusIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-const NoteHome = () => {
+const NoteStart = () => {
 
   const { push } = useRouter();
 
@@ -35,4 +35,4 @@ const NoteHome = () => {
   );
 };
 
-export default NoteHome;
+export default NoteStart;

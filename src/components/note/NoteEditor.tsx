@@ -1,13 +1,14 @@
+import { Note } from '@/utils/types';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 
-interface NoteEditorProps {
+type NoteEditorProps = {
   id: string;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
-  setNotes: any;
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 };
 
 const NoteEditor = (props: NoteEditorProps) => {
@@ -28,8 +29,8 @@ const NoteEditor = (props: NoteEditorProps) => {
     props.setTitle(e.target.value);
 
     // update notes title in notes state for specific note by _id from url params
-    props.setNotes((prevNotes: any) => {
-      const updatedNotes = prevNotes.map((note: any) => {
+    props.setNotes((prevNotes: Note[]) => {
+      const updatedNotes = prevNotes.map((note: Note) => {
         if (note._id === props.id) {
           note.title = e.target.value;
         }

@@ -1,7 +1,7 @@
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-interface NoteDisplayProps {
+type NoteDisplayProps = {
   title: string;
   content: string;
 };

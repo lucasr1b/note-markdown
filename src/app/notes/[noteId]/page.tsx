@@ -1,5 +1,5 @@
 'use client';
-import Note from '@/components/note/Note';
+import NoteItem from '@/components/note/NoteItem';
 import Sidebar from '@/components/sidebar/Sidebar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   return (
     <main className='flex min-h-screen bg-base-300'>
       <Sidebar />
-      <Note id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
+      <NoteItem id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
     </main>
   );
 };

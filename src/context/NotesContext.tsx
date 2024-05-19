@@ -1,14 +1,9 @@
 'use client';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { Note } from '@/utils/types';
 
-interface Note {
-  _id: string;
-  title: string;
-  content: string;
-}
-
-interface NotesContextType {
+type NotesContextType = {
   notes: Note[];
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
   notesLoading: boolean;

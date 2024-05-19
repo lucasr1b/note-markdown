@@ -1,10 +1,11 @@
+import { Note } from '@/utils/types';
 import { TrashIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 
 type SidebarItemProps = {
-  note: any;
-  deleteNote: any;
-  getSelectedNoteId: any;
+  note: Note;
+  deleteNote: (e: React.MouseEvent, id: string) => void;
+  getSelectedNoteId: () => string;
 };
 
 const SidebarItem = ({ note, deleteNote, getSelectedNoteId }: SidebarItemProps) => {
