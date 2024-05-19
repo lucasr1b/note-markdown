@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
 import SidebarItem from './SidebarItem';
-import { DocumentPlusIcon, PencilIcon } from '@heroicons/react/16/solid';
+import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/16/solid';
+import { useSession } from 'next-auth/react';
 
 const Sidebar = () => {
   const { notes, setNotes, notesLoading } = useNotes();
+  const session = useSession();
+
   const { push } = useRouter();
 
   const getSelectedNoteId = () => {
@@ -15,7 +18,7 @@ const Sidebar = () => {
   };
 
   const newNote = async () => {
-    const note = await axios.post('/api/notes', { userId: '1' });
+    const note = await axios.post('/api/notes', { userId: session.data?.user?.email });
     setNotes([...notes, note.data]);
   };
 
@@ -48,15 +51,27 @@ const Sidebar = () => {
           ))
         )
       }
-      <div className='flex flex-col gap-2 mt-auto mb-4'>
-        <li className='btn btn-sm h-10 btn-primary no-animation '>
-          Sign up
-        </li>
-        <li className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral'>
-          Log in
-        </li>
-      </div>
-    </ul >
+      {session ? (
+        <div className='flex items-center px-2 bg-neutral h-12 btn-neutral rounded-md mt-auto mb-4 group justify-between'>
+          <div className='flex items-center'>
+            <img className='w-6 h-6 mr-2 rounded-full' src={session.data?.user?.image} alt='User profile image' />
+            <span className='font-semibold'>{session.data?.user?.name}</span>
+          </div>
+          <div className='hidden group-hover:block p-1 rounded hover:bg-code hover:cursor-pointer'>
+            <ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' />
+          </div>
+        </div>
+      ) : (
+        <div className='flex flex-col gap-2 mt-auto mb-4'>
+          <li className='btn btn-sm h-10 btn-primary no-animation '>
+            Sign up
+          </li>
+          <li className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral'>
+            Log in
+          </li>
+        </div>
+      )}
+    </ul>
   );
 };
 

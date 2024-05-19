@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
 import './globals.css';
 import { NotesProvider } from '@/context/NotesContext';
+import { SessionProvider } from 'next-auth/react';
 
 const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <NotesProvider>
-          {children}
-        </NotesProvider>
+        <SessionProvider>
+          <NotesProvider>
+            {children}
+          </NotesProvider>
+        </SessionProvider>
       </body>
     </html>
   );
