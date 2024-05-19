@@ -12,6 +12,7 @@ interface NoteEditorProps {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   setNotes: any;
+  isLoading: boolean;
 };
 
 const Note = (props: NoteEditorProps) => {
@@ -27,11 +28,36 @@ const Note = (props: NoteEditorProps) => {
         </label>
       </div>
       <div className='flex flex-col px-60 py-32'>
-        {isEditingMode ?
-          <NoteEditor id={props.id} title={props.newNoteTitle} setTitle={props.setNewNoteTitle} content={props.content} setContent={props.setContent} setNotes={props.setNotes} />
-          :
-          <NoteDisplay title={props.newNoteTitle} content={props.content} />
-        }
+        {props.isLoading ? (
+          <div>
+            <div className='animate-pulse h-10 w-1/3 bg-neutral rounded'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+          </div>
+        ) : (
+          isEditingMode ? (
+            <NoteEditor
+              id={props.id}
+              title={props.newNoteTitle}
+              setTitle={props.setNewNoteTitle}
+              content={props.content}
+              setContent={props.setContent}
+              setNotes={props.setNotes}
+            />
+          ) : (
+            <NoteDisplay
+              title={props.newNoteTitle}
+              content={props.content}
+            />
+          )
+        )}
       </div>
     </div>
   );

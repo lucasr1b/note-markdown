@@ -9,12 +9,19 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   const { notes, setNotes } = useNotes();
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchNote = async () => {
-      const note = await axios.get(`/api/notes/${params.noteId}`);
-      setContent(note.data.content);
-      setTitle(note.data.title);
+      try {
+        const note = await axios.get(`/api/notes/${params.noteId}`);
+        setContent(note.data.content);
+        setTitle(note.data.title);
+      } catch (err) {
+        console.error('Error fetching notes:', err);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchNote();
   }, [params.noteId]);
@@ -22,7 +29,7 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   return (
     <main className='flex min-h-screen bg-base-300'>
       <Sidebar />
-      <Note id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} />
+      <Note id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
     </main>
   );
 };
