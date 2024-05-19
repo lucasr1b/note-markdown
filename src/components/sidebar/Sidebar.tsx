@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
 import SidebarItem from './SidebarItem';
+import { DocumentPlusIcon, PencilIcon } from '@heroicons/react/16/solid';
 
 const Sidebar = () => {
   const { notes, setNotes, notesLoading } = useNotes();
@@ -27,25 +28,35 @@ const Sidebar = () => {
 
   return (
     <ul className='menu fixed w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
-      <Link className='p-2 flex items-center gap-2' href={'/'}>
-        <div className='bg-base-300 rounded-lg py-1 px-2 w-fit'>NM</div>
-        <h1 className='font-bold'>NoteMarkdown</h1>
+      <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
+        NoteMarkdown
       </Link>
-      <li className='btn btn-sm h-10 btn-primary mt-2 mb-8 no-animation' onClick={newNote}>
+      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation' onClick={newNote}>
+        <DocumentPlusIcon className='w-5 h-5' />
         Create new note
-      </li>
-      {notesLoading ? (
-        <div className='flex flex-col gap-2'>
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className='w-full h-10 leading-relaxed animate-pulse bg-code rounded-md'></div>
-          ))}
-        </div>
-      ) : (
-        notes.map((note) => (
-          <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
-        ))
-      )}
-    </ul>
+      </button>
+      {
+        notesLoading ? (
+          <div className='flex flex-col gap-2'>
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className='w-full h-10 leading-relaxed animate-pulse bg-code rounded-md'></div>
+            ))}
+          </div>
+        ) : (
+          notes.map((note) => (
+            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
+          ))
+        )
+      }
+      <div className='flex flex-col gap-2 mt-auto mb-4'>
+        <li className='btn btn-sm h-10 btn-primary no-animation '>
+          Sign up
+        </li>
+        <li className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral'>
+          Log in
+        </li>
+      </div>
+    </ul >
   );
 };
 
