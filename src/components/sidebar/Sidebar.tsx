@@ -10,7 +10,7 @@ import { signOut, useSession } from 'next-auth/react';
 const Sidebar = () => {
   const { notes, setNotes, notesLoading } = useNotes();
   const session = useSession();
-
+  const sessionLoading = session.status === 'loading';
   const { push } = useRouter();
 
   const getSelectedNoteId = () => {
@@ -38,39 +38,38 @@ const Sidebar = () => {
         <DocumentPlusIcon className='w-5 h-5' />
         Create new note
       </button>
-      {
-        notesLoading ? (
-          <div className='flex flex-col gap-2'>
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className='w-full h-10 leading-relaxed animate-pulse bg-code rounded-md'></div>
-            ))}
-          </div>
-        ) : (
-          notes.map((note) => (
-            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
-          ))
-        )
-      }
-      {session.data?.user ? (
-        <div className='flex items-center px-2 bg-neutral h-12 btn-neutral rounded-md mt-auto mb-4 group justify-between'>
-          <div className='flex items-center'>
-            <img className='w-6 h-6 mr-2 rounded-full' src={session.data?.user?.image} alt='User profile image' />
-            <span className='font-semibold'>{session.data?.user?.name}</span>
-          </div>
-          <div className='hidden group-hover:block p-1 rounded hover:bg-code hover:cursor-pointer' onClick={() => signOut()}>
-            <ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' />
-          </div>
+      {notesLoading ? (
+        <div className='flex flex-col gap-2'>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className='w-full h-10 leading-relaxed animate-pulse bg-code rounded-md'></div>
+          ))}
         </div>
       ) : (
-        <div className='flex flex-col gap-2 mt-auto mb-4'>
-          <Link className='btn btn-sm h-10 btn-primary no-animation' href={'/login'}>
-            Sign up
-          </Link>
-          <Link className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral' href={'/login'}>
-            Log in
-          </Link>
-        </div>
+        notes.map((note) => (
+          <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
+        ))
       )}
+      {!sessionLoading && (
+        session.data?.user ? (
+          <div className='flex items-center px-2 bg-neutral h-12 btn-neutral rounded-md mt-auto mb-4 group justify-between'>
+            <div className='flex items-center'>
+              <img className='w-6 h-6 mr-2 rounded-full' src={session.data.user.image} alt='User profile image' />
+              <span className='font-semibold'>{session.data.user.name}</span>
+            </div>
+            <div className='hidden group-hover:block p-1 rounded hover:bg-code hover:cursor-pointer' onClick={() => signOut()}>
+              <ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' />
+            </div>
+          </div>
+        ) : (
+          <div className='flex flex-col gap-2 mt-auto mb-4'>
+            <Link className='btn btn-sm h-10 btn-primary no-animation' href={'/login'}>
+              Sign up
+            </Link>
+            <Link className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral' href={'/login'}>
+              Log in
+            </Link>
+          </div>
+        ))}
     </ul>
   );
 };
