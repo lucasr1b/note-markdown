@@ -10,7 +10,7 @@ const SignupPage = () => {
       </Link>
       <div className='bg-base-300 flex flex-col items-center justify-center h-full'>
         <h1 className='text-4xl font-bold mb-2'>Edit and view markdown</h1>
-        <p className='text-content-accent mb-6'>Sign up now!</p>
+        <p className='text-content-accent mb-6'>Sign up now for free!</p>
         <form className='flex w-full justify-center'
           action={async () => {
             'use server'
