@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         "code": "#454545",
+        "content-accent": "#8d8c8f",
         "table": "#808080",
       },
     },
