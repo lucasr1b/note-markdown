@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
 import SidebarItem from './SidebarItem';
-import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/16/solid';
+import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon } from '@heroicons/react/16/solid';
 import { signOut, useSession } from 'next-auth/react';
 
 const Sidebar = () => {
@@ -54,7 +54,7 @@ const Sidebar = () => {
           <div className='flex items-center px-2 bg-neutral h-12 btn-neutral rounded-md mt-auto mb-4 group justify-between'>
             <div className='flex items-center'>
               <img className='w-6 h-6 mr-2 rounded-full' src={session.data.user.image} alt='User profile image' />
-              <span className='font-semibold'>{session.data.user.name}</span>
+              <span className='font-semibold whitespace-nowrap overflow-hidden text-ellipsis w-32'>{session.data.user.email}</span>
             </div>
             <div className='hidden group-hover:block p-1 rounded hover:bg-code hover:cursor-pointer' onClick={() => signOut()}>
               <ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' />

@@ -1,12 +1,12 @@
-import mongoose, { ObjectId, Schema } from 'mongoose';
+import mongoose, { Schema, Document, models, model } from 'mongoose';
 
-export interface INote extends mongoose.Document {
+export interface INote extends Document {
   userId: string;
   title: string;
   content: string;
 }
 
-const NoteSchema = new mongoose.Schema({
+const NoteSchema: Schema = new Schema({
   userId: {
     type: String,
     required: true,
@@ -23,6 +23,6 @@ const NoteSchema = new mongoose.Schema({
   },
 });
 
-const Note = mongoose.models.Note || mongoose.model<INote>('Note', NoteSchema);
+const Note: mongoose.Model<INote> = models.Note || model<INote>('Note', NoteSchema);
 
 export default Note;
