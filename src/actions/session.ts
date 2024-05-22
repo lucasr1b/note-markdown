@@ -1,7 +1,8 @@
 "use server"
 import Note from '@/backend/models/Note';
 import User from '@/backend/models/User';
-import { SessionData, sessionOptions } from '@/lib/session';
+import { sessionOptions } from '@/lib/session';
+import { SessionData } from '@/utils/types';
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation'

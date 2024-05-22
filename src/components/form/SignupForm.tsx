@@ -6,6 +6,7 @@ import { signup } from '@/actions/session';
 import { useFormState } from 'react-dom';
 import { useSession } from '@/context/SessionContext';
 import { useNotes } from '@/context/NotesContext';
+import { toast } from 'react-toastify';
 
 const SignupForm = () => {
   const { setSession } = useSession();
@@ -19,8 +20,9 @@ const SignupForm = () => {
     if (!data.error) {
       setSession({ _id: data._id, email: data.email, isLoggedIn: true });
       setNotes(data.notes || []);
+      toast.success('Account registered!');
     } else {
-      console.log(data.error);
+      toast.error(data.error);
     }
   };
 

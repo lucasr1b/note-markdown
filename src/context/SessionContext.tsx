@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { getSession } from '@/actions/session';
-import { SessionData } from '@/lib/session';
+import { SessionData } from '@/utils/types';
 
 type SessionContextType = {
   session: SessionData | null;

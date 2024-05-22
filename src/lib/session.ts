@@ -8,13 +8,3 @@ export const sessionOptions: SessionOptions = {
     secure: process.env.NODE_ENV === 'production',
   },
 };
-
-export const defaultSession = {
-  isLoggedIn: false,
-};
-
-export interface SessionData {
-  _id?: string;
-  email?: string;
-  isLoggedIn: boolean;
-}

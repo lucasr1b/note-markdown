@@ -5,6 +5,7 @@ import { useFormState } from 'react-dom';
 import { login } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
 import { useNotes } from '@/context/NotesContext';
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
   const { setSession } = useSession();
@@ -18,8 +19,9 @@ const LoginForm = () => {
     if (!data.error) {
       setSession({ _id: data._id, email: data.email, isLoggedIn: true });
       setNotes(data.notes || []);
+      toast.success('Welcome back!')
     } else {
-      console.log(data.error);
+      toast.error(data.error);
     }
   };
 
