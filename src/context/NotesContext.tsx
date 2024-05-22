@@ -20,8 +20,8 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       try {
         const fetchedNotes = await axios.get('/api/notes');
         setNotes(fetchedNotes.data);
-      } catch (error) {
-        console.error('Error fetching notes:', error);
+      } catch (err: any) {
+        console.error('Error fetching notes:', err);
       } finally {
         setNotesLoading(false);
       }

@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
-import './globals.css';
 import { NotesProvider } from '@/context/NotesContext';
+import { SessionProvider } from '@/context/SessionContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './globals.css';
 
 const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
@@ -18,9 +21,15 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <NotesProvider>
-          {children}
-        </NotesProvider>
+        <SessionProvider>
+          <NotesProvider>
+            {children}
+            <ToastContainer
+              position='bottom-right'
+              autoClose={2500}
+            />
+          </NotesProvider>
+        </SessionProvider>
       </body>
     </html>
   );
