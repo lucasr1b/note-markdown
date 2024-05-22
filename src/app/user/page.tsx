@@ -1,22 +1,21 @@
-import { signOut, auth } from '@/auth';
+'use client';
+import { logout } from '@/actions/session';
+import { useSession } from '@/context/SessionContext';
 
-const UserPage = async () => {
-  const session = await auth()
+const UserPage = () => {
+  const { session } = useSession();
 
-  if (!session || !session.user) return 'No session.';
+  if (session && !session.isLoggedIn) {
+    return <p>You are not logged in</p>;
+  }
 
   return (
     <div>
-      <p>Logged in as: {session.user.email}</p>
-      <form
-        action={async () => {
-          'use server'
-          await signOut()
-        }}
-      >
+      <p>Logged in as: {session?.email}</p>
+      <form action={logout}>
         <button type='submit'>Sign Out</button>
       </form>
-    </div>
+    </div >
   )
 }
 

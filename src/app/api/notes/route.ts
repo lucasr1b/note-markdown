@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { getSession } from '@/actions/session';
 import Note from '@/backend/models/Note';
 import { connectToDB } from '@/backend/utils/connectToDB';
 
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 };
 
 export async function GET() {
-  const session = await auth()
-  const notes = await Note.find({ userId: session?.user?.email }).select('_id title');
+  const session = await getSession();
+  const notes = await Note.find({ userId: session?.email }).select('_id title');
   return new Response(JSON.stringify(notes));
 };

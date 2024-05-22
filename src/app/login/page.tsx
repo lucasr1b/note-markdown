@@ -1,8 +1,24 @@
-import { signIn } from '@/auth';
-import Image from 'next/image';
+'use client';
+import { useEffect } from 'react';
+import LoginForm from '@/components/form/LoginForm';
+import { useSession } from '@/context/SessionContext';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+  const { session, sessionLoading } = useSession();
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (session?.isLoggedIn) {
+      push('/');
+    }
+  }, [session, push]);
+
+  if (session?.isLoggedIn || sessionLoading) {
+    return null;
+  }
+
   return (
     <div className='relative h-screen'>
       <Link className='absolute top-0 left-0 p-4' href={'/'}>
@@ -10,25 +26,9 @@ const LoginPage = () => {
       </Link>
       <div className='bg-base-300 flex flex-col items-center justify-center h-full'>
         <h1 className='text-4xl font-bold mb-6'>Welcome back!</h1>
-        <form className='flex w-full justify-center'
-          action={async () => {
-            'use server'
-            await signIn('google', { redirectTo: '/user' })
-          }}
-        >
-          <button type='submit' className='btn btn-sm h-12 btn-neutral shadow-md mt-2 mb-8 no-animation w-1/3'>
-            <Image src={'/image.png'} width={20} height={20} alt={'Google'} /> LOG IN WITH GOOGLE
-          </button>
-        </form>
-        <form className='flex flex-col w-1/3 gap-2'>
-          <label className='text-sm'>Email</label>
-          <input name='email' type='email' placeholder='tony@stark.com' autoComplete='username' autoCapitalize='none' required className='bg-neutral h-12 w-full rounded-md px-4 focus:outline-code mb-4' />
-          <label className='text-sm'>Password</label>
-          <input name='password' type='password' autoComplete='current-password' required className='bg-neutral h-12 w-full rounded-md px-4 focus:outline-code' />
-          <button className='btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full'>LOG IN</button>
-        </form>
+        <LoginForm />
         <Link href={'/signup'} className='text-secondary underline mt-4'>
-          Don&apos;t have an account? Sign up
+          Sign up instead?
         </Link>
       </div>
     </div>

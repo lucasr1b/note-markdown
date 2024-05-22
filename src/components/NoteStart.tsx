@@ -1,19 +1,26 @@
+'use client';
+import { getSession } from '@/actions/session';
 import { useNotes } from '@/context/NotesContext';
+import { useSession } from '@/context/SessionContext';
 import { DocumentPlusIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const NoteStart = () => {
   const { notes, setNotes, notesLoading } = useNotes();
-  const session = useSession();
+  const { session } = useSession();
 
   const { push } = useRouter();
 
   const newNote = async () => {
-    const note = await axios.post('/api/notes', { userId: session.data?.user?.email });
-    setNotes([...notes, note.data]);
-    push(`/notes/${note.data._id}`);
+    if (session && session.isLoggedIn) {
+      const note = await axios.post('/api/notes', { userId: session.email });
+      setNotes([...notes, note.data]);
+      push(`/notes/${note.data._id}`);
+    } else {
+      // handle not logged in new note creation
+      console.log("Not logged in")
+    }
   }
 
   return (

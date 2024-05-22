@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
 import './globals.css';
 import { NotesProvider } from '@/context/NotesContext';
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from '@/context/SessionContext';
 
 const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
