@@ -56,6 +56,14 @@ const SignupForm = () => {
           type="password"
           autoComplete="new-password"
           required
+          className="bg-neutral h-12 w-full rounded-md px-4 focus:outline-code mb-4"
+        />
+        <label className="text-sm">Confirm password</label>
+        <input
+          name="cpassword"
+          type="password"
+          autoComplete="new-password"
+          required
           className="bg-neutral h-12 w-full rounded-md px-4 focus:outline-code"
         />
         <button type="submit" className="btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full">SIGN UP</button>
