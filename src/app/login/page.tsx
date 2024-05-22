@@ -25,7 +25,7 @@ const LoginPage = () => {
         <h1 className='text-2xl font-bold'>NoteMarkdown</h1>
       </Link>
       <div className='bg-base-300 flex flex-col items-center justify-center h-full'>
-        <h1 className='text-4xl font-bold mb-6'>Welcome back!</h1>
+        <h1 className='text-4xl font-extrabold mb-6'>Welcome back!</h1>
         <LoginForm />
         <Link href={'/signup'} className='text-secondary underline mt-4'>
           Sign up instead?

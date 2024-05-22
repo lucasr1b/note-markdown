@@ -25,7 +25,7 @@ const SignupPage = () => {
         <h1 className='text-2xl font-bold'>NoteMarkdown</h1>
       </Link>
       <div className='bg-base-300 flex flex-col items-center justify-center h-full w-full'>
-        <h1 className='text-4xl font-bold mb-2'>Edit and view markdown</h1>
+        <h1 className='text-4xl font-extrabold mb-2'>Edit and view markdown</h1>
         <p className='text-content-accent mb-6'>Sign up now for free!</p>
         <SignupForm />
         <Link href={'/login'} className='text-secondary underline mt-4'>

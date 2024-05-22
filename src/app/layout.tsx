@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 
-const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
 
 export const metadata: Metadata = {
   title: 'NoteMarkdown',
