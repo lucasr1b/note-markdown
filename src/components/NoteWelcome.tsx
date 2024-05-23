@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNotes } from '@/context/NotesContext';
 import welcomeNote from '@/utils/welcomeNote';
 
-const NotePage = ({ params }: { params: { noteId: string } }) => {
+const NoteWelcome = () => {
   const { notes, setNotes } = useNotes();
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState('');
@@ -15,24 +15,22 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const note = await axios.get(`/api/notes/${params.noteId}`);
-        setContent(note.data.content);
-        setTitle(note.data.title);
-      } catch (err) {
-        console.error('Error fetching notes:', err);
-      } finally {
+        setContent(welcomeNote.content);
+        setTitle(welcomeNote.title);
+      }
+      finally {
         setIsLoading(false);
       }
     };
     fetchNote();
-  }, [params.noteId]);
+  }, []);
 
   return (
-    <main className='flex min-h-screen bg-base-300'>
+    <main className='flex min-h-screen bg-base-300 w-full'>
       <Sidebar />
-      <NoteItem id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
+      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
     </main>
   );
 };
 
-export default NotePage;
+export default NoteWelcome;
