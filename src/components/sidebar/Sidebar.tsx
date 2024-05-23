@@ -56,7 +56,7 @@ const Sidebar = () => {
       <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
         NoteMarkdown
       </Link>
-      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation' onClick={newNote}>
+      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
         <DocumentPlusIcon className='w-5 h-5' />
         Create new note
       </button>
@@ -80,7 +80,6 @@ const Sidebar = () => {
           <button>close</button>
         </form>
       </dialog>
-
       {notesLoading ? (
         <div className='flex flex-col gap-2'>
           {Array.from({ length: 3 }).map((_, i) => (
