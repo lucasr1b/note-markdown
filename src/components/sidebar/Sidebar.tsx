@@ -7,14 +7,17 @@ import SidebarItem from './SidebarItem';
 import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon } from '@heroicons/react/16/solid';
 import { logout } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
+import { usePathname } from 'next/navigation';
 
 const Sidebar = () => {
   const { notes, setNotes, notesLoading } = useNotes();
   const { session, setSession, sessionLoading } = useSession();
   const { push } = useRouter();
+  const pathName = usePathname();
 
   const getSelectedNoteId = () => {
-    return window.location.pathname.split('/').pop() as string;
+    const segments = pathName.split('/');
+    return segments.length > 2 && segments[1] === 'notes' ? segments[2] : '';
   };
 
   const newNote = async () => {

@@ -82,7 +82,7 @@ body, html {
   }
 
   pre {
-    @apply bg-code p-4 rounded;
+    @apply bg-code p-4 rounded my-2;
   }
 
   strong {

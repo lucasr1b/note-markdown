@@ -4,6 +4,7 @@ import Sidebar from '@/components/sidebar/Sidebar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNotes } from '@/context/NotesContext';
+import welcomeNote from '@/utils/welcomeNote';
 
 const NotePage = ({ params }: { params: { noteId: string } }) => {
   const { notes, setNotes } = useNotes();
@@ -13,14 +14,24 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
 
   useEffect(() => {
     const fetchNote = async () => {
-      try {
-        const note = await axios.get(`/api/notes/${params.noteId}`);
-        setContent(note.data.content);
-        setTitle(note.data.title);
-      } catch (err) {
-        console.error('Error fetching notes:', err);
-      } finally {
-        setIsLoading(false);
+      if (params.noteId === '1') {
+        try {
+          setContent(welcomeNote.content);
+          setTitle(welcomeNote.title);
+        }
+        finally {
+          setIsLoading(false);
+        }
+      } else {
+        try {
+          const note = await axios.get(`/api/notes/${params.noteId}`);
+          setContent(note.data.content);
+          setTitle(note.data.title);
+        } catch (err) {
+          console.error('Error fetching notes:', err);
+        } finally {
+          setIsLoading(false);
+        }
       }
     };
     fetchNote();

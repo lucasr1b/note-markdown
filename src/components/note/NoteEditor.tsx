@@ -39,11 +39,13 @@ const NoteEditor = (props: NoteEditorProps) => {
       return updatedNotes;
     });
 
+    if (props.id === '1') return;
     await axios.put(`/api/notes/${props.id}/rename`, { title: e.target.value });
   }
 
   const handleContentChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     props.setContent(e.target.value);
+    if (props.id === '1') return;
     await axios.put(`/api/notes/${props.id}`, { content: e.target.value });
   }
 
