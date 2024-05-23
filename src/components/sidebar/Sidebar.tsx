@@ -4,28 +4,38 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
 import SidebarItem from './SidebarItem';
-import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon } from '@heroicons/react/16/solid';
+import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, EnvelopeIcon } from '@heroicons/react/16/solid';
 import { logout } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
+import { usePathname } from 'next/navigation';
+import { useRef } from 'react';
+import Image from 'next/image';
 
 const Sidebar = () => {
   const { notes, setNotes, notesLoading } = useNotes();
   const { session, setSession, sessionLoading } = useSession();
   const { push } = useRouter();
+  const pathName = usePathname();
+
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
   const getSelectedNoteId = () => {
-    return window.location.pathname.split('/').pop() as string;
+    const segments = pathName.split('/');
+    return segments.length > 2 && segments[1] === 'notes' ? segments[2] : '';
   };
 
-  const newNote = async () => {
+  const newNote = async (e: any) => {
     if (session && session.email) {
       const note = await axios.post('/api/notes', { userId: session.email });
       setNotes([...notes, note.data]);
     } else {
-      // handle not logged in new note creation
-      console.log('Not logged in.');
+      dialogRef.current?.showModal();
     }
   };
+
+  const closeModal = () => {
+    dialogRef.current?.close();
+  }
 
   const deleteNote = async (e: React.MouseEvent, noteId: string) => {
     if (getSelectedNoteId() === noteId) push('/');
@@ -46,10 +56,30 @@ const Sidebar = () => {
       <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
         NoteMarkdown
       </Link>
-      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation' onClick={newNote}>
+      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
         <DocumentPlusIcon className='w-5 h-5' />
         Create new note
       </button>
+      <dialog className='modal' ref={dialogRef}>
+        <div className='modal-box p-12'>
+          <form method='dialog'>
+            <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2' onClick={closeModal}>✕</button>
+          </form>
+          <h3 className='font-bold text-2xl mb-4'>Edit and view markdown for free</h3>
+          <div className='flex flex-col items-center gap-2 w-full'>
+            <button type='submit' className='btn btn-sm h-12 w-full btn-neutral shadow-md no-animation'>
+              <Image src={'/image.png'} width={20} height={20} alt={'Google'} /> SIGN UP WITH GOOGLE
+            </button>
+            <Link className='btn btn-sm h-12 w-full btn-neutral no-animation' href={'/signup'}>
+              <EnvelopeIcon width={20} height={20} /> SIGN UP WITH EMAIL
+            </Link>
+            <span className='text-base mt-4'>Already have an account? <Link className='text-primary underline' href={'/login'}>Login</Link></span>
+          </div>
+        </div>
+        <form method='dialog' className='modal-backdrop'>
+          <button>close</button>
+        </form>
+      </dialog>
       {notesLoading ? (
         <div className='flex flex-col gap-2'>
           {Array.from({ length: 3 }).map((_, i) => (
