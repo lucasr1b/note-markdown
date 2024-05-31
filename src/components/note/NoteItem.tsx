@@ -19,15 +19,15 @@ const NoteItem = (props: NoteProps) => {
   const [isEditingMode, setIsEditingMode] = useState(true);
 
   return (
-    <div className='ml-56 flex-1 flex-col p-2'>
-      <div className='flex justify-end w-full'>
+    <div className='md:ml-56 flex-1 flex flex-col p-2'>
+      <div className='sticky top-0 bg-base-300 flex justify-end w-full px-4 py-2 z-10'>
         <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
           <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
           <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
           <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
         </label>
       </div>
-      <div className='flex flex-col px-60 py-32'>
+      <div className='flex flex-col px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-4 md:py-8 lg:py-16 xl:py-24 2xl:py-32'>
         {props.isLoading ? (
           <div>
             <div className='animate-pulse h-10 w-1/3 bg-neutral rounded'></div>

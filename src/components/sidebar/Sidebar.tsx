@@ -52,7 +52,7 @@ const Sidebar = () => {
 
 
   return (
-    <ul className='menu fixed w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
+    <ul className='menu fixed w-full md:w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
       <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
         NoteMarkdown
       </Link>
