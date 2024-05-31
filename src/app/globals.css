@@ -82,7 +82,7 @@ body, html {
   }
 
   pre {
-    @apply bg-code p-4 rounded my-2 sm:max-w-md md:max-w-md lg:max-w-xl xl:max-w-3xl 2xl:max-w-6xl;
+    @apply bg-code rounded my-2 sm:max-w-md md:max-w-md lg:max-w-xl xl:max-w-3xl 2xl:max-w-6xl;
   }
 
   strong {

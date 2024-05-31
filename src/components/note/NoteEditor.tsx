@@ -60,6 +60,20 @@ const NoteEditor = (props: NoteEditorProps) => {
     }
   };
 
+  const handleTabKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const { selectionStart, selectionEnd } = contentRef.current!;
+      const value = contentRef.current!.value;
+      const newValue = `${value.substring(0, selectionStart)}\t${value.substring(selectionEnd)}`;
+      props.setContent(newValue);
+
+      setTimeout(() => {
+        contentRef.current!.selectionStart = contentRef.current!.selectionEnd = selectionStart + 1;
+      }, 0);
+    }
+  };
+
   useEffect(() => {
     if (props.content != '') setIsPlaceholderVisible(false);
     contentRef.current!.value = props.content;
@@ -87,6 +101,7 @@ const NoteEditor = (props: NoteEditorProps) => {
         onBlur={() => setIsPlaceholderVisible(props.content === '')}
         value={isPlaceholderVisible ? 'Start typing...' : props.content}
         onChange={handleContentChange}
+        onKeyDown={handleTabKey}
       />
     </>
   );
