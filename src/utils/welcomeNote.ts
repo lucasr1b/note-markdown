@@ -3,8 +3,7 @@ import { Note } from './types';
 const welcomeNote: Note = {
   _id: '1',
   title: 'Welcome',
-  content: `
-# NoteMarkdown
+  content: `# NoteMarkdown
 
 Discover the powerful features of NoteMarkdown, your ultimate markdown editor.
 
@@ -89,8 +88,7 @@ ReactDOM.render(
 
 Learn more about using NoteMarkdown and its features by visiting our [documentation](https://notemarkdown.example.com/docs).
 ***
-Thank you for choosing NoteMarkdown!
-`
+Thank you for choosing NoteMarkdown!`
 };
 
 export default welcomeNote;

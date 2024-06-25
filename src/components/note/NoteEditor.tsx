@@ -55,7 +55,6 @@ const NoteEditor = (props: NoteEditorProps) => {
 
   const adjustTextareaHeight = () => {
     if (contentRef.current) {
-      contentRef.current.style.height = 'auto'; // Reset height
       contentRef.current.style.height = `${contentRef.current.scrollHeight}px`; // Set height to scrollHeight
     }
   };
@@ -74,15 +73,23 @@ const NoteEditor = (props: NoteEditorProps) => {
     }
   };
 
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const newContent = `\n${props.content}`;
+      props.setContent(newContent);
+      setTimeout(() => {
+        contentRef.current!.setSelectionRange(0, 0);
+        contentRef.current!.focus();
+      }, 0);
+    }
+  }
+
   useEffect(() => {
     if (props.content != '') setIsPlaceholderVisible(false);
     contentRef.current!.value = props.content;
     adjustTextareaHeight();
   }, [props.content, contentRef]);
-
-  useEffect(() => {
-    adjustTextareaHeight();
-  }, [props.content]);
 
   return (
     <>
@@ -93,6 +100,7 @@ const NoteEditor = (props: NoteEditorProps) => {
         type='text'
         className='bg-inherit text-4xl font-bold mb-1 outline-none placeholder:text-accent'
         onChange={handleTitleChange}
+        onKeyDown={handleEnterKey}
       />
       <textarea
         ref={contentRef}
