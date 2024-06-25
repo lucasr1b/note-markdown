@@ -28,7 +28,7 @@ const SignupForm = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <form
+      {/* <form
         className="flex w-full justify-center"
         onSubmit={(e) => {
           e.preventDefault();
@@ -38,7 +38,7 @@ const SignupForm = () => {
         <button type="submit" className="btn btn-sm h-12 btn-neutral shadow-md mt-2 mb-8 no-animation w-1/3">
           <Image src={'/image.png'} width={20} height={20} alt={'Google'} /> SIGN UP WITH GOOGLE
         </button>
-      </form>
+      </form> */}
       <form className="flex flex-col w-1/3 gap-2" onSubmit={handleSignup}>
         <label className="text-sm">Email</label>
         <input

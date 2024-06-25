@@ -16,13 +16,13 @@ const SidebarItem = ({ note, deleteNote, getSelectedNoteId }: SidebarItemProps) 
     note._id == '1' ? (
       <li key={note._id}>
         <div className='flex justify-between items-center h-10 active'>
-          {note.title}
+          <span className='overflow-hidden text-ellipsis whitespace-nowrap w-36'>{note.title}</span>
         </div>
       </li>
     ) : (
       <li key={note._id}>
         <Link className={`flex justify-between items-center h-10 group ${isActive ? 'active' : ''}`} href={`/notes/${note._id}`}>
-          {note.title}
+          <span className='overflow-hidden text-ellipsis whitespace-nowrap w-36'>{note.title}</span>
           <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
             <TrashIcon className='w-4 h-4 text-white opacity-75' />
           </div>

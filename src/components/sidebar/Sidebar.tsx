@@ -52,7 +52,7 @@ const Sidebar = () => {
 
 
   return (
-    <ul className='menu fixed w-full md:w-56 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
+    <ul className='menu fixed w-full md:w-60 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
       <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
         NoteMarkdown
       </Link>
@@ -67,10 +67,10 @@ const Sidebar = () => {
           </form>
           <h3 className='font-bold text-2xl mb-4'>Edit and view markdown for free</h3>
           <div className='flex flex-col items-center gap-2 w-full'>
-            <button type='submit' className='btn btn-sm h-12 w-full btn-neutral shadow-md no-animation'>
+            {/* <button type='submit' className='btn btn-sm h-12 w-full btn-neutral shadow-md no-animation'>
               <Image src={'/image.png'} width={20} height={20} alt={'Google'} /> SIGN UP WITH GOOGLE
-            </button>
-            <Link className='btn btn-sm h-12 w-full btn-neutral no-animation' href={'/signup'}>
+            </button> */}
+            <Link className='btn btn-sm h-12 w-full btn-primary no-animation' href={'/signup'}>
               <EnvelopeIcon width={20} height={20} /> SIGN UP WITH EMAIL
             </Link>
             <span className='text-base mt-4'>Already have an account? <Link className='text-primary underline' href={'/login'}>Login</Link></span>
