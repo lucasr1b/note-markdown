@@ -36,10 +36,10 @@ const NoteStart = () => {
           <div className='flex flex-col gap-2'>
             <h1 className='text-2xl'>Start</h1>
             <div className='flex items-center gap-1 p-2 w-fit rounded-md text-secondary hover:bg-base-100 hover:cursor-pointer' onClick={newNote}>
-              <DocumentPlusIcon className='w-5 h-5 text-secondary' /> Create a new note...
+              <DocumentPlusIcon className='w-5 h-5 text-secondary' /> Create a new note
             </div>
             <div className='flex items-center gap-1 p-2 w-fit rounded-md text-secondary hover:bg-base-100 hover:cursor-pointer' onClick={newWelcomeNote}>
-              <DocumentTextIcon className='w-5 h-5 text-secondary' /> Create note using template
+              <DocumentTextIcon className='w-5 h-5 text-secondary' /> Create a new note using template
             </div>
           </div>
         </div>
