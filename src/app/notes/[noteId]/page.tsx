@@ -19,7 +19,7 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
         setContent(note.data.content);
         setTitle(note.data.title);
         setUserId(note.data.userId);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error fetching notes:', err);
       } finally {
         setIsLoading(false);
