@@ -9,15 +9,16 @@ type SidebarItemProps = {
 };
 
 const SidebarItem = ({ note, deleteNote, getSelectedNoteId }: SidebarItemProps) => {
-  const isActive = getSelectedNoteId() === note._id;
+  const selectedNoteId = getSelectedNoteId();
+  const isWelcomeNote = selectedNoteId === '' && note._id === '1';
+  const isActive = selectedNoteId === note._id || isWelcomeNote;
 
   return (
-
-    note._id == '1' ? (
+    note._id === '1' ? (
       <li key={note._id}>
-        <div className='flex justify-between items-center h-10 active'>
+        <Link className={`flex justify-between items-center h-10 ${isActive ? 'active' : ''}`} href='/'>
           <span className='overflow-hidden text-ellipsis whitespace-nowrap w-36'>{note.title}</span>
-        </div>
+        </Link>
       </li>
     ) : (
       <li key={note._id}>
