@@ -11,6 +11,12 @@ const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700', 
 export const metadata: Metadata = {
   title: 'NoteMarkdown',
   description: 'NoteMarkdown',
+  icons: [
+    {
+      rel: 'icon',
+      url: '/icon.png',
+    },
+  ],
 };
 
 export default function RootLayout({
