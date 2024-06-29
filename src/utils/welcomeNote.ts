@@ -68,11 +68,11 @@ And of course some here
 \`Inline code\`
 
 ## Automatic URL linking
-https://notemarkdown.com
-And with custom labels [NoteMarkdown](https://notemarkdown.com)
+https://note-markdown.vercel.app
+And with custom labels [NoteMarkdown](https://note-markdown.vercel.app)
 
 ## Images
-![Image](https://images.pexels.com/photos/1555900/pexels-photo-1555900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
+![Image](https://note-markdown.vercel.app/stock.jpeg)
 
 ## Quotes
 > "Your imagination is the preview of life's coming attractions." - Albert Einstein
