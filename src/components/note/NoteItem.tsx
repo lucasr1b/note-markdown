@@ -28,11 +28,16 @@ const NoteItem = (props: NoteProps) => {
     <div className='md:ml-56 flex-1 flex flex-col p-2'>
       <div className='sticky top-0 bg-base-300 flex justify-end w-full px-4 py-2 z-10'>
         {props.id == '1' ? (
-          <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
-            <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
-            <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
-            <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
-          </label>
+          <div className='relative flex items-center'>
+            <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
+              <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
+              <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
+              <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
+            </label>
+            <div className='absolute -left-4 tooltip tooltip-primary tooltip-open tooltip-left'
+              data-tip={isEditingMode ? 'Click the Book to switch to displaying' : 'Click the Pencil to switch to editing'}
+            ></div>
+          </div>
         ) : (
           <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
             <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
