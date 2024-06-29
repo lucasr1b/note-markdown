@@ -34,10 +34,10 @@ Isn't that neat?
 
 ## Tables
 
-| Item          | Status     |
+| Project       | Status     |
 | ------------- | ---------  |
 | NoteMarkdown  | Complete   |
-| Logged in     | Incomplete |
+| Next project  | Pending    |
 
 (Markdown source for columns and rows do not need to align)
 
