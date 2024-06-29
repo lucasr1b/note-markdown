@@ -6,12 +6,15 @@ import NoteStart from '@/components/NoteStart';
 
 const NoteStartPage = () => {
 
-  const { session } = useSession();
+  const { session, sessionLoading } = useSession();
 
   return (
     <main className='flex min-h-screen bg-base-300'>
       <Sidebar />
-      {session && session.isLoggedIn ? <NoteStart /> : <NoteWelcome />}
+
+      {sessionLoading ? null : (
+        session && session.isLoggedIn ? <NoteStart /> : <NoteWelcome />
+      )}
     </main>
   );
 };

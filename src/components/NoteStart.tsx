@@ -34,13 +34,6 @@ const NoteStart = () => {
               <DocumentPlusIcon className='w-5 h-5 text-secondary' /> Create a new note...
             </div>
           </div>
-          <div className='flex flex-col gap-2'>
-            <h1 className='text-2xl'>Recent</h1>
-            <div className='flex flex-col gap-1 px-2'>
-              <p className='flex items-center gap-1 text-secondary hover:text-primary hover:cursor-pointer w-fit'>Hello World</p>
-              <p className='flex items-center gap-1 text-secondary hover:text-primary hover:cursor-pointer w-fit'>Lucas Ribeiro</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
