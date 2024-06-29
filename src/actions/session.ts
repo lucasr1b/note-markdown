@@ -1,4 +1,4 @@
-"use server"
+'use server'
 import Note from '@/backend/models/Note';
 import User from '@/backend/models/User';
 import { connectToDB } from '@/backend/utils/connectToDB';

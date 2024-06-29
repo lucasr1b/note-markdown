@@ -34,9 +34,9 @@ const NoteItem = (props: NoteProps) => {
               <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
               <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
             </label>
-            <div className='absolute -left-4 tooltip tooltip-open tooltip-left'
-              data-tip={isEditingMode ? 'Click the book to switch to Displaying!' : 'Click the pencil to switch to Editing!'}
-            ></div>
+            <div className='custom-tooltip shiny'>
+              {isEditingMode ? 'Click the book to switch to Displaying!' : 'Click the pencil to switch to Editing!'}
+            </div>
           </div>
         ) : (
           <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>

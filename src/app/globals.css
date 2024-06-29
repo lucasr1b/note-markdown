@@ -11,6 +11,56 @@ body, html {
   @apply text-white;
 }
 
+/* Shiny animation */
+
+@keyframes shiny {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.shiny {
+  background: linear-gradient(
+    135deg, /* Adjust the angle for a more diagonal shine */
+    rgba(255, 255, 255, 0.05) 45%, /* Narrow the gradient spread */
+    rgba(255, 255, 255, 0.15) 50%, /* Make the shine line narrower */
+    rgba(255, 255, 255, 0.05) 55%
+  );
+  background-size: 200% 100%;
+  animation: shiny 3s linear infinite;
+}
+
+/* Tooltip */
+
+.custom-tooltip {
+  position: absolute;
+  left: -15px;
+  white-space: nowrap;
+  padding: 0.25rem 0.5rem;
+  background-color: #353332;
+  color: #fff;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  z-index: 10;
+  transition: opacity 0.3s ease, background-position 3s;
+  transform: translateX(-100%);
+}
+
+.custom-tooltip::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 6px;
+  border-color: transparent transparent transparent #413F3E;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -12px;
+}
+
 /* Note Display styles */
 .note-display {
   h1, h2, h3, h4, h5, h6 {
@@ -102,7 +152,11 @@ body, html {
     @apply text-left !important;
   }
 
-  input[type="checkbox"]:disabled {
+  input:disabled {
     filter: invert(100%) hue-rotate(18deg) brightness(5);
+  }
+
+  img {
+    @apply w-auto h-auto max-w-md my-4;
   }
 }

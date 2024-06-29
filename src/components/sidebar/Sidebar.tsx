@@ -26,7 +26,7 @@ const Sidebar = () => {
     return segments.length > 2 && segments[1] === 'notes' ? segments[2] : '';
   };
 
-  const newNote = async (e: any) => {
+  const newNote = async () => {
     if (session && session.email) {
       const note = await axios.post('/api/notes', { userId: session.email });
       setNotes([...notes, note.data]);
@@ -107,7 +107,7 @@ const Sidebar = () => {
               <span className='font-semibold whitespace-nowrap overflow-hidden text-ellipsis'>{session.email}</span>
             </div>
             {logOutLoading ? (
-              <span className="loading loading-spinner loading-xs mr-2"></span>
+              <span className='loading loading-spinner loading-xs mr-2'></span>
             ) : (
               <form action={handleLogout}>
                 <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'><ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' /></button>
