@@ -1,7 +1,6 @@
 'use client';
-
 import Image from 'next/image';
-import { useFormState } from 'react-dom';
+import React, { useState } from 'react';
 import { login } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
 import { useNotes } from '@/context/NotesContext';
@@ -11,18 +10,24 @@ const LoginForm = () => {
   const { setSession } = useSession();
   const { setNotes } = useNotes();
 
+  const [loading, setLoading] = useState(false);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+    setLoading(true);
 
+    const formData = new FormData(e.target as HTMLFormElement);
     const data = await login({ error: undefined }, formData);
+
     if (!data.error) {
       setSession({ _id: data._id, email: data.email, isLoggedIn: true });
       setNotes(data.notes || []);
-      toast.success('Welcome back!')
+      toast.success('Welcome back!');
     } else {
       toast.error(data.error);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -54,12 +59,21 @@ const LoginForm = () => {
           required
           className="bg-neutral h-12 w-full rounded-md px-4 focus:outline-code"
         />
-        <button
-          type="submit"
-          className="btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full"
-        >
-          LOGIN
-        </button>
+        {loading ? (
+          <button
+            type="button"
+            className={`btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-50`}>
+            LOGGING IN...
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className={`btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full`}
+          >
+            LOG IN
+          </button>
+        )}
+
       </form>
     </div>
   );

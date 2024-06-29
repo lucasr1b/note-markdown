@@ -1,9 +1,7 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
 import { signup } from '@/actions/session';
-import { useFormState } from 'react-dom';
 import { useSession } from '@/context/SessionContext';
 import { useNotes } from '@/context/NotesContext';
 import { toast } from 'react-toastify';
@@ -12,11 +10,15 @@ const SignupForm = () => {
   const { setSession } = useSession();
   const { setNotes } = useNotes();
 
+  const [loading, setLoading] = useState(false);
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+    setLoading(true);
 
+    const formData = new FormData(e.target as HTMLFormElement);
     const data = await signup({ error: undefined }, formData);
+
     if (!data.error) {
       setSession({ _id: data._id, email: data.email, isLoggedIn: true });
       setNotes(data.notes || []);
@@ -24,6 +26,8 @@ const SignupForm = () => {
     } else {
       toast.error(data.error);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -66,7 +70,19 @@ const SignupForm = () => {
           required
           className="bg-neutral h-12 w-full rounded-md px-4 focus:outline-code"
         />
-        <button type="submit" className="btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full">SIGN UP</button>
+        {loading ? (
+          <button
+            type="button"
+            className="btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-50"
+          >
+            SIGNING UP...
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full">
+            SIGN UP
+          </button>
+
+        )}
       </form>
     </div>
   );
