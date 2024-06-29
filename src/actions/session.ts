@@ -11,8 +11,6 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation'
 import { z } from 'zod';
 
-connectToDB();
-
 const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6, 'Password must be at least 6 characters long'),
@@ -32,6 +30,7 @@ export const signup = async (
   prevState: { error: undefined | string },
   formData: FormData
 ) => {
+  await connectToDB();
   const session = await getSessionWithMethods();
 
   const formEmail = formData.get('email') as string;
@@ -69,6 +68,7 @@ export const login = async (
   prevState: { error: undefined | string },
   formData: FormData
 ) => {
+  await connectToDB();
   const session = await getSessionWithMethods();
 
   const formEmail = formData.get('email') as string;
