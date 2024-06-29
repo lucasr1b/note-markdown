@@ -8,7 +8,7 @@ import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, EnvelopeIcon } from '
 import { logout } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
 import { usePathname } from 'next/navigation';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 const Sidebar = () => {
@@ -16,6 +16,8 @@ const Sidebar = () => {
   const { session, setSession, sessionLoading } = useSession();
   const { push } = useRouter();
   const pathName = usePathname();
+
+  const [logOutLoading, setLogOutLoading] = useState(false);
 
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -45,9 +47,11 @@ const Sidebar = () => {
   };
 
   const handleLogout = async () => {
+    setLogOutLoading(true);
     await logout();
     setSession(null);
     setNotes([]);
+    setLogOutLoading(false);
   };
 
 
@@ -100,9 +104,13 @@ const Sidebar = () => {
               {/* <img className='w-6 h-6 mr-2 rounded-full' src={session.data.user.image} alt='User profile image' /> */}
               <span className='font-semibold whitespace-nowrap overflow-hidden text-ellipsis'>{session.email}</span>
             </div>
-            <form action={handleLogout}>
-              <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'><ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' /></button>
-            </form>
+            {logOutLoading ? (
+              <span className='loading loading-spinner loading-xs mr-2'></span>
+            ) : (
+              <form action={handleLogout}>
+                <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'><ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' /></button>
+              </form>
+            )}
           </div>
         ) : (
           <div className='flex flex-col gap-2 mt-auto mb-4'>

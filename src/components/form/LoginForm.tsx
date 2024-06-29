@@ -62,8 +62,8 @@ const LoginForm = () => {
         {loading ? (
           <button
             type="button"
-            className={`btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-50`}>
-            LOGGING IN...
+            className={`btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-75`}>
+            <span className="loading loading-spinner loading-md"></span>
           </button>
         ) : (
           <button

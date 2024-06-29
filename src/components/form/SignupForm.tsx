@@ -73,9 +73,8 @@ const SignupForm = () => {
         {loading ? (
           <button
             type="button"
-            className="btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-50"
-          >
-            SIGNING UP...
+            className={`btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-75`}>
+            <span className="loading loading-spinner loading-md"></span>
           </button>
         ) : (
           <button type="submit" className="btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full">
