@@ -19,7 +19,7 @@ const Sidebar = () => {
 
   const [logOutLoading, setLogOutLoading] = useState(false);
 
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const getSelectedNoteId = () => {
     const segments = pathName.split('/');
@@ -37,7 +37,7 @@ const Sidebar = () => {
 
   const closeModal = () => {
     dialogRef.current?.close();
-  }
+  };
 
   const deleteNote = async (e: React.MouseEvent, noteId: string) => {
     if (getSelectedNoteId() === noteId) push('/');
@@ -48,12 +48,14 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     setLogOutLoading(true);
-    await logout();
-    setSession(null);
-    setNotes([]);
-    setLogOutLoading(false);
+    try {
+      await logout();
+      setSession(null);
+      setNotes([]);
+    } finally {
+      setLogOutLoading(false);
+    }
   };
-
 
   return (
     <ul className='menu fixed w-full md:w-60 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
@@ -105,7 +107,7 @@ const Sidebar = () => {
               <span className='font-semibold whitespace-nowrap overflow-hidden text-ellipsis'>{session.email}</span>
             </div>
             {logOutLoading ? (
-              <span className='loading loading-spinner loading-xs mr-2'></span>
+              <span className="loading loading-spinner loading-xs mr-2"></span>
             ) : (
               <form action={handleLogout}>
                 <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'><ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' /></button>
