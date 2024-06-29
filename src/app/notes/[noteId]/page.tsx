@@ -30,7 +30,7 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   return (
     <main className='flex flex-col md:flex-row min-h-screen bg-base-300'>
       <Sidebar />
-      <NoteItem id={params.noteId} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
+      <NoteItem id={params.noteId} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
     </main>
   );
 };

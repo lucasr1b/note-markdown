@@ -1,14 +1,14 @@
 'use client';
 import { BookOpenIcon, PencilIcon } from '@heroicons/react/16/solid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NoteDisplay from './NoteDisplay';
 import NoteEditor from './NoteEditor';
 import { Note } from '@/utils/types';
 
 type NoteProps = {
   id: string;
-  newNoteTitle: string;
-  setNewNoteTitle: React.Dispatch<React.SetStateAction<string>>;
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -18,14 +18,28 @@ type NoteProps = {
 const NoteItem = (props: NoteProps) => {
   const [isEditingMode, setIsEditingMode] = useState(true);
 
+  useEffect(() => {
+    if (props.id == '1') {
+      setIsEditingMode(false);
+    }
+  }, [props.id]);
+
   return (
     <div className='md:ml-56 flex-1 flex flex-col p-2'>
       <div className='sticky top-0 bg-base-300 flex justify-end w-full px-4 py-2 z-10'>
-        <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
-          <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
-          <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
-          <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
-        </label>
+        {props.id == '1' ? (
+          <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
+            <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
+            <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
+            <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
+          </label>
+        ) : (
+          <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
+            <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
+            <div className='swap-on'><PencilIcon className='h-5 w-5' /></div>
+            <div className='swap-off'><BookOpenIcon className='h-5 w-5' /></div>
+          </label>
+        )}
       </div>
       <div className='flex flex-col px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-4 md:py-8 lg:py-16 xl:py-24 2xl:py-32'>
         {props.isLoading ? (
@@ -45,15 +59,15 @@ const NoteItem = (props: NoteProps) => {
           isEditingMode ? (
             <NoteEditor
               id={props.id}
-              title={props.newNoteTitle}
-              setTitle={props.setNewNoteTitle}
+              title={props.title}
+              setTitle={props.setTitle}
               content={props.content}
               setContent={props.setContent}
               setNotes={props.setNotes}
             />
           ) : (
             <NoteDisplay
-              title={props.newNoteTitle}
+              title={props.title}
               content={props.content}
             />
           )

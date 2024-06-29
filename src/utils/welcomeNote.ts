@@ -5,6 +5,7 @@ const welcomeNote: Note = {
   title: 'Welcome',
   content: `Discover the features of NoteMarkdown, your ultimate yet simple markdown editor.
 
+*Click the **pencil icon** on the top right corner to start editing this note.*
 ***
 Automatically generates table of contents through naming any H2 or H3 (## or ###) "Table of Contents"
 

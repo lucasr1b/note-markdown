@@ -28,7 +28,7 @@ const NoteWelcome = () => {
   return (
     <main className='flex min-h-screen bg-base-300 w-full'>
       <Sidebar />
-      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} newNoteTitle={title} setNewNoteTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
+      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
     </main>
   );
 };
