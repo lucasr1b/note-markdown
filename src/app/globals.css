@@ -90,7 +90,7 @@ body, html {
   }
 
   table {
-    @apply w-fit border-collapse border border-table;
+    @apply w-fit border-collapse border border-table my-2;
   }
 
   th {

@@ -4,6 +4,7 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeSlug from 'rehype-slug';
 import remarkToc from 'remark-toc';
 import 'highlight.js/styles/atom-one-dark.css';
+import remarkBreaks from 'remark-breaks';
 
 type NoteDisplayProps = {
   title: string;
@@ -20,7 +21,7 @@ const NoteDisplay = (props: NoteDisplayProps) => {
       <div className='note-display bg-inherit'>
         <Markdown
           rehypePlugins={[rehypeHighlight, rehypeSlug]}
-          remarkPlugins={[remarkGfm, remarkToc]}>{props.content}
+          remarkPlugins={[remarkGfm, remarkToc, remarkBreaks]}>{props.content}
         </Markdown>
       </div>
     </>

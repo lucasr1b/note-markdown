@@ -3,21 +3,12 @@ import { Note } from './types';
 const welcomeNote: Note = {
   _id: '1',
   title: 'Welcome',
-  content: `# NoteMarkdown
+  content: `Discover the features of NoteMarkdown, your ultimate yet simple markdown editor.
 
-Discover the powerful features of NoteMarkdown, your ultimate markdown editor.
-
-## Features Overview
-
-* Follows [CommonMark](https://commonmark.org)
-* Supports [GitHub Flavored Markdown](https://github.github.com/gfm/)
-* Renders React components seamlessly
-* Provides customizable components
-* Integrates multiple plugins for enhanced functionality
+***
+Automatically generates table of contents through naming any H2 or H3 (## or ###) "Table of Contents"
 
 ## Table of Contents
-
-The following table of contents is generated automatically:
 
 ## Code Syntax Highlighting
 
@@ -28,7 +19,7 @@ def greet(name):
     return f"Hello, {name}!"
 
 print(greet("Alice"))
-\`\`\`
+\`\`\`\
 
 \`\`\`javascript
 function sum(a, b) {
@@ -36,59 +27,35 @@ function sum(a, b) {
 }
 
 console.log(sum(5, 3));
-\`\`\`
+\`\`\`\
 
 Isn't that neat?
 
-## GitHub Flavored Markdown (GFM)
+## Tables
 
-With GFM support, you can enjoy extended markdown features such as:
+| Item          | Status     |
+| ------------- | ---------  |
+| NoteMarkdown  | Complete   |
+| Logged in     | Incomplete |
 
-| Feature       | Support              |
-| ------------- | -------------------- |
-| CommonMark    | Complete             |
-| GFM           | Complete with plugin |
+(Markdown source for columns and rows do not need to align)
 
-Strikethrough:
-
-~~This text is struck through~~
-
-Task lists:
-
+## Todo Lists
 - [ ] Finish the NoteMarkdown project
 - [x] Create an example note
 
-Automatic URL linking:
+## Text Formatting
 
-https://notemarkdown.example.com
+**Bold text** and _italic text_ and even **_combined_**
+~~This text is struck through~~
 
-## Custom Component Integration
+## Automatic URL linking
+https://notemarkdown.com
+And with custom labels [NoteMarkdown](https://notemarkdown.com)
 
-You can integrate custom components to enhance your markdown rendering experience:
-
-\`\`\`tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Markdown from 'react-markdown';
-import CustomHeader from './CustomHeader';
-
-const markdownContent = \`
-# Custom Components in NoteMarkdown
-
-Here we use a custom header component.
-\`;
-
-ReactDOM.render(
-  <Markdown components={{ h1: CustomHeader }}>{markdownContent}</Markdown>,
-  document.getElementById('root')
-);
-\`\`\`
-
-## More Information
-
-Learn more about using NoteMarkdown and its features by visiting our [documentation](https://notemarkdown.example.com/docs).
 ***
-Thank you for choosing NoteMarkdown!`
+Made with ❤️ by [Lucas](https://x.com/LucasCodes)
+`
 };
 
 export default welcomeNote;
