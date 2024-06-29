@@ -49,7 +49,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     setLogOutLoading(true);
     try {
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       await logout();
     } finally {
       setSession(null);
