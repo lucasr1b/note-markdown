@@ -101,4 +101,8 @@ body, html {
     @apply border border-table py-2 px-4;
     @apply text-left !important;
   }
+
+  input[type="checkbox"]:disabled {
+    filter: invert(100%) hue-rotate(18deg) brightness(5);
+  }
 }
