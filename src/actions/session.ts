@@ -4,7 +4,9 @@ import User from '@/backend/models/User';
 import { connectToDB } from '@/backend/utils/connectToDB';
 import { sessionOptions } from '@/lib/session';
 import { SessionData } from '@/utils/types';
+import welcomeNote from '@/utils/welcomeNote';
 import { getIronSession } from 'iron-session';
+import { ObjectId } from 'mongodb';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation'
 import { z } from 'zod';
@@ -53,13 +55,13 @@ export const signup = async (
   session.isLoggedIn = true;
   await session.save();
 
-  const notes = await Note.find({ userId: user.email }).select('_id title');
+  await Note.create({ ...welcomeNote, _id: new ObjectId().toString(), userId: user.email })
 
   return {
     _id: user._id,
     email: user.email,
     isLoggedIn: true,
-    notes: notes || [],
+    notes: [welcomeNote],
   };
 }
 
