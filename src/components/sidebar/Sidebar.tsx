@@ -49,10 +49,11 @@ const Sidebar = () => {
   const handleLogout = async () => {
     setLogOutLoading(true);
     try {
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
       await logout();
+    } finally {
       setSession(null);
       setNotes([]);
-    } finally {
       setLogOutLoading(false);
     }
   };
