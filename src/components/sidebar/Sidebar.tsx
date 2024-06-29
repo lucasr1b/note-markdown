@@ -82,7 +82,7 @@ const Sidebar = () => {
       </dialog>
       {notesLoading ? (
         <div className='flex flex-col gap-2'>
-          {Array.from({ length: 3 }).map((_, i) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className='w-full h-10 leading-relaxed animate-pulse bg-code rounded-md'></div>
           ))}
         </div>

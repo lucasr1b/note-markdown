@@ -45,15 +45,9 @@ const NoteItem = (props: NoteProps) => {
         {props.isLoading ? (
           <div>
             <div className='animate-pulse h-10 w-1/3 bg-neutral rounded'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
-            <div className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            {[...Array(9)].map((_, i) => (
+              <div key={i} className='animate-pulse h-6 w-full bg-neutral rounded mt-4'></div>
+            ))}
           </div>
         ) : (
           isEditingMode ? (
