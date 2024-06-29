@@ -8,7 +8,7 @@ import { useSession } from '@/context/SessionContext';
 
 type NoteProps = {
   id: string;
-  userId: string;
+  userId?: string;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
