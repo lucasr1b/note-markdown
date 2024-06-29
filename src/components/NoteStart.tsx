@@ -2,7 +2,7 @@
 import { getSession } from '@/actions/session';
 import { useNotes } from '@/context/NotesContext';
 import { useSession } from '@/context/SessionContext';
-import { DocumentPlusIcon } from '@heroicons/react/16/solid';
+import { DocumentPlusIcon, DocumentTextIcon } from '@heroicons/react/16/solid';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -17,9 +17,14 @@ const NoteStart = () => {
       const note = await axios.post('/api/notes', { userId: session.email });
       setNotes([...notes, note.data]);
       push(`/notes/${note.data._id}`);
-    } else {
-      // handle not logged in new note creation
-      console.log("Not logged in")
+    }
+  }
+
+  const newWelcomeNote = async () => {
+    if (session && session.isLoggedIn) {
+      const note = await axios.post('/api/notes/template', { userId: session.email });
+      setNotes([...notes, note.data]);
+      push(`/notes/${note.data._id}`);
     }
   }
 
@@ -32,6 +37,9 @@ const NoteStart = () => {
             <h1 className='text-2xl'>Start</h1>
             <div className='flex items-center gap-1 p-2 w-fit rounded-md text-secondary hover:bg-base-100 hover:cursor-pointer' onClick={newNote}>
               <DocumentPlusIcon className='w-5 h-5 text-secondary' /> Create a new note...
+            </div>
+            <div className='flex items-center gap-1 p-2 w-fit rounded-md text-secondary hover:bg-base-100 hover:cursor-pointer' onClick={newWelcomeNote}>
+              <DocumentTextIcon className='w-5 h-5 text-secondary' /> Create note using template
             </div>
           </div>
         </div>
