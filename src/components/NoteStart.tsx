@@ -29,8 +29,8 @@ const NoteStart = () => {
   }
 
   return (
-    <div className='ml-56 flex-1 flex-col p-2'>
-      <div className='flex flex-col px-60 py-32'>
+    <div className='md:ml-56 flex-1 flex flex-col p-2'>
+      <div className='flex flex-col px-4 py-4 md:px-28 md:py-32 lg:px-56 xl:px-64'>
         <h1 className='text-4xl font-semibold mb-8'>NoteMarkdown</h1>
         <div className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
