@@ -65,7 +65,7 @@ const NoteItem = (props: NoteProps) => {
           )
         )}
       </div>
-      <div className='flex flex-col px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-4 md:py-8 lg:py-16 xl:py-24 2xl:py-32'>
+      <div className='flex flex-col px-4 md:px-10 lg:px-16 xl:px-24 2xl:px-32 py-4 md:py-8 lg:py-16 xl:py-24 2xl:py-32'>
         {props.isLoading ? (
           <div>
             <div className='animate-pulse h-10 w-1/3 bg-neutral rounded'></div>
