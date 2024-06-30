@@ -4,14 +4,19 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
 import SidebarItem from './SidebarItem';
-import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, EnvelopeIcon } from '@heroicons/react/16/solid';
+import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, EnvelopeIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import { logout } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
 import { usePathname } from 'next/navigation';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 
-const Sidebar = () => {
+type SidebarProps = {
+  isMobileNavOpened?: boolean;
+  closeMobileNav?: () => void;
+}
+
+const Sidebar = (props: SidebarProps) => {
   const { notes, setNotes, notesLoading } = useNotes();
   const { session, setSession, sessionLoading } = useSession();
   const { push } = useRouter();
@@ -60,9 +65,18 @@ const Sidebar = () => {
 
   return (
     <ul className='menu fixed w-full md:w-60 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
-      <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
-        NoteMarkdown
-      </Link>
+      {props.isMobileNavOpened ? (
+        <div className='flex items-center justify-between px-1'>
+          <Link className='my-2 font-bold text-2xl' href={'/'}>
+            NoteMarkdown
+          </Link>
+          <div onClick={props.closeMobileNav}><XMarkIcon className='w-8 h-8' /></div>
+        </div>
+      ) : (
+        <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
+          NoteMarkdown
+        </Link>
+      )}
       <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
         <DocumentPlusIcon className='w-5 h-5' />
         Create new note

@@ -4,6 +4,7 @@ import Sidebar from '@/components/sidebar/Sidebar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNotes } from '@/context/NotesContext';
+import MobileNav from '@/components/MobileNav';
 
 const NotePage = ({ params }: { params: { noteId: string } }) => {
   const { notes, setNotes } = useNotes();
@@ -11,6 +12,9 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   const [content, setContent] = useState('');
   const [userId, setUserId] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+
+  const [isMobileView, setIsMobileView] = useState(false);
+  const [isMobileNavOpened, setIsMobileNavOpened] = useState(false);
 
   useEffect(() => {
     const fetchNote = async () => {
@@ -28,10 +32,21 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
     fetchNote();
   }, [params.noteId]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <main className='flex flex-col md:flex-row min-h-screen bg-base-300'>
-      <Sidebar />
-      <NoteItem id={params.noteId} userId={userId} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
+      {isMobileView ? isMobileNavOpened && <Sidebar isMobileNavOpened={isMobileNavOpened} closeMobileNav={() => setIsMobileNavOpened(false)} /> : <Sidebar />}
+      {isMobileView ? !isMobileNavOpened && <MobileNav toggleNav={() => setIsMobileNavOpened(true)} /> : null}
+      <NoteItem id={params.noteId} userId={userId} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isMobileView={isMobileView} isMobileNavOpened={isMobileNavOpened} isLoading={isLoading} />
     </main>
   );
 };
