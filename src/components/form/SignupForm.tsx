@@ -43,7 +43,7 @@ const SignupForm = () => {
           <Image src={'/image.png'} width={20} height={20} alt={'Google'} /> SIGN UP WITH GOOGLE
         </button>
       </form> */}
-      <form className='flex flex-col w-1/3 gap-2' onSubmit={handleSignup}>
+      <form className='flex flex-col w-3/4 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 gap-2' onSubmit={handleSignup}>
         <label className='text-sm'>Email</label>
         <input
           name='email'
