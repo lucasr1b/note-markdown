@@ -122,10 +122,12 @@ const Sidebar = (props: SidebarProps) => {
               <span className='font-semibold whitespace-nowrap overflow-hidden text-ellipsis'>{session.email}</span>
             </div>
             {logOutLoading ? (
-              <span className='loading loading-spinner loading-xs mr-2'></span>
+              <span className='loading loading-spinner loading-sm md:loading-xs mr-2'></span>
             ) : (
               <form action={handleLogout}>
-                <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'><ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' /></button>
+                <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'>
+                  <ArrowRightStartOnRectangleIcon className='w-5 h-5 sm:w-4 md:h-4 text-red-500' />
+                </button>
               </form>
             )}
           </div>
