@@ -30,7 +30,7 @@ const NoteStartPage = () => {
         {isMobileView ? !isMobileNavOpened && <MobileNav toggleNav={() => setIsMobileNavOpened(true)} /> : null}
 
         {sessionLoading ? null : (
-          session && session.isLoggedIn ? <NoteStart /> : <NoteWelcome isMobileNavOpened={isMobileNavOpened} />
+          session && session.isLoggedIn ? <NoteStart /> : <NoteWelcome isMobileView={isMobileView} isMobileNavOpened={isMobileNavOpened} />
         )}
       </div>
     </main>

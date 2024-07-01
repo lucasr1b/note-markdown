@@ -9,6 +9,7 @@ import MobileNav from './MobileNav';
 
 type NoteWelcomeProps = {
   isMobileNavOpened: boolean;
+  isMobileView: boolean;
 }
 
 const NoteWelcome = (props: NoteWelcomeProps) => {
@@ -32,7 +33,7 @@ const NoteWelcome = (props: NoteWelcomeProps) => {
 
   return (
     <main className='flex min-h-screen bg-base-300 w-full'>
-      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isMobileNavOpened={props.isMobileNavOpened} isLoading={isLoading} />
+      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isMobileView={props.isMobileView} isMobileNavOpened={props.isMobileNavOpened} isLoading={isLoading} />
     </main>
   );
 };
