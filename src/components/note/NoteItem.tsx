@@ -48,7 +48,7 @@ const NoteItem = (props: NoteProps) => {
                   <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
                   <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
                 </label>
-                <div className='custom-tooltip shiny'>
+                <div className='custom-tooltip shiny hidden xs:block'>
                   {isEditingMode ? 'Click the book to switch to Displaying!' : 'Click the pencil to switch to Editing!'}
                 </div>
               </div>
@@ -61,7 +61,7 @@ const NoteItem = (props: NoteProps) => {
             ) : (
               <div className='relative flex items-center'>
                 <div className={`p-2  ${props.isMobileView ? 'bg-neutral rounded opacity-50' : 'opacity-50'}`}><PencilIcon className='h-5 w-5' /></div>
-                <div className='custom-tooltip'>
+                <div className='custom-tooltip hidden xs:block'>
                   You do not have permission to edit this note.
                 </div>
               </div>

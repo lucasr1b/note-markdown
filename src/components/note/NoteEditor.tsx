@@ -98,13 +98,13 @@ const NoteEditor = (props: NoteEditorProps) => {
         placeholder={'Untitled'}
         defaultValue={props.title == 'Untitled' ? '' : props.title}
         type='text'
-        className='bg-inherit text-4xl font-bold mb-1 outline-none placeholder:text-accent w-80 md:w-full'
+        className='bg-inherit text-4xl font-bold mb-1 outline-none placeholder:text-accent max-w-64 xs:min-w-full md:max-w-md lg:max-w-lg'
         onChange={handleTitleChange}
         onKeyDown={handleEnterKey}
       />
       <textarea
         ref={contentRef}
-        className={`bg-inherit resize-none outline-none mt-4 w-80 md:w-full ${isPlaceholderVisible ? 'text-accent' : ''}`}
+        className={`bg-inherit resize-none outline-none mt-4 min-w-full max-w-full ${isPlaceholderVisible ? 'text-accent' : ''}`}
         onFocus={handleContentFocus}
         onBlur={() => setIsPlaceholderVisible(props.content === '')}
         value={isPlaceholderVisible ? 'Start typing...' : props.content}

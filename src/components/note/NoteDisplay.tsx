@@ -17,7 +17,7 @@ const NoteDisplay = (props: NoteDisplayProps) => {
 
   return (
     <>
-      <p className='text-4xl font-bold mb-1 w-80 break-words md:w-full'>{props.title}</p>
+      <p className='text-4xl font-bold mb-1 break-words max-w-64 xs:min-w-full md:max-w-md lg:max-w-lg'>{props.title}</p>
       <div className='note-display bg-inherit'>
         <Markdown
           rehypePlugins={[rehypeHighlight, rehypeSlug]}

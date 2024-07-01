@@ -13,6 +13,9 @@ const config: Config = {
         "content-accent": "#8d8c8f",
         "table": "#808080",
       },
+      screens: {
+        'xs': '380px',
+      },
     },
   },
   daisyui: {

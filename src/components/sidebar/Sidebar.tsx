@@ -77,7 +77,7 @@ const Sidebar = (props: SidebarProps) => {
           NoteMarkdown
         </Link>
       )}
-      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
+      <button className='btn btn-sm h-10 w-full btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
         <DocumentPlusIcon className='w-5 h-5' />
         Create new note
       </button>
