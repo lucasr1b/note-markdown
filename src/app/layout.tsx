@@ -33,6 +33,7 @@ export default function RootLayout({
             <ToastContainer
               position='bottom-right'
               autoClose={2500}
+              theme='dark'
             />
           </NotesProvider>
         </SessionProvider>

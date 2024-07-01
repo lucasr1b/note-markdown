@@ -6,6 +6,10 @@
 --toastify-color-success: #4f46e5 !important;
 }
 
+.Toastify__toast-theme--dark {
+  @apply bg-neutral text-white !important;
+}
+
 /* Base styles */
 body, html {
   @apply text-white;
