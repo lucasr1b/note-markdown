@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
 import { NotesProvider } from '@/context/NotesContext';
@@ -37,6 +38,7 @@ export default function RootLayout({
             />
           </NotesProvider>
         </SessionProvider>
+        <Analytics />
       </body>
     </html>
   );
