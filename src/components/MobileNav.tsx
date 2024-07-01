@@ -11,7 +11,7 @@ const MobileNav = ({ toggleNav }: MobileNavProps) => {
   const { session, sessionLoading } = useSession();
 
   return (
-    <div className='w-full sticky top-0 flex items-center bg-neutral py-2 px-4'>
+    <div className='w-full sticky top-0 flex items-center bg-neutral py-2 px-4 z-50'>
       <Link className='flex items-center gap-2' href='/'>
         <img src='/icon.png' alt='logo' className='w-10 h-10' />
         <Link className='font-bold' href='/'>NoteMarkdown</Link>
