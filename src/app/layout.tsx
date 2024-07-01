@@ -11,13 +11,26 @@ const inter = Lexend({ subsets: ['latin'], weight: ['400', '500', '600', '700', 
 
 export const metadata: Metadata = {
   title: 'NoteMarkdown',
-  description: 'NoteMarkdown',
+  description: 'Your ultimate, yet simple markdown editor packed with all the essential features you\'ll ever need. Create, edit and view markdown notes all in one place.',
   icons: [
     {
       rel: 'icon',
       url: '/icon.png',
     },
   ],
+  openGraph: {
+    title: 'NoteMarkdown',
+    description: 'Your ultimate, yet simple markdown editor packed with all the essential features you\'ll ever need. Create, edit and view markdown notes all in one place.',
+    images: [
+      {
+        url: '/icon.png',
+        width: 256,
+        height: 256,
+        alt: 'NoteMarkdown',
+      },
+    ],
+  },
+
 };
 
 export default function RootLayout({
