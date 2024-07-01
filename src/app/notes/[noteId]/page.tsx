@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNotes } from '@/context/NotesContext';
 import MobileNav from '@/components/MobileNav';
+import { useRouter } from 'next/navigation';
 
 const NotePage = ({ params }: { params: { noteId: string } }) => {
   const { notes, setNotes } = useNotes();
@@ -16,6 +17,8 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
   const [isMobileView, setIsMobileView] = useState(false);
   const [isMobileNavOpened, setIsMobileNavOpened] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     const fetchNote = async () => {
       try {
@@ -24,13 +27,17 @@ const NotePage = ({ params }: { params: { noteId: string } }) => {
         setTitle(note.data.title);
         setUserId(note.data.userId);
       } catch (err: any) {
-        console.error('Error fetching notes:', err);
+        if (err.response && err.response.status === 404) {
+          router.push('/');
+        } else {
+          console.error('Error fetching notes:', err);
+        }
       } finally {
         setIsLoading(false);
       }
     };
     fetchNote();
-  }, [params.noteId]);
+  }, [params.noteId, router]);
 
   useEffect(() => {
     const handleResize = () => {
