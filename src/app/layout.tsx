@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   icons: [
     {
       rel: 'icon',
-      url: '/icon.png',
+      url: 'https://note-markdown.vercel.app/icon.png',
     },
   ],
   openGraph: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: 'Your ultimate, yet simple markdown editor packed with all the essential features you\'ll ever need. Create, edit and view markdown notes all in one place.',
     images: [
       {
-        url: '/icon.png',
+        url: 'https://note-markdown.vercel.app/icon.png',
         width: 256,
         height: 256,
         alt: 'NoteMarkdown',
