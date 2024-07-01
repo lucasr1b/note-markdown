@@ -67,6 +67,8 @@ body, html {
 
 /* Note Display styles */
 .note-display {
+  @apply break-words;
+
   h1, h2, h3, h4, h5, h6 {
     @apply mt-8 font-bold;
   }
@@ -76,7 +78,7 @@ body, html {
   }
 
   blockquote {
-    @apply border-l-4 border-accent italic pl-4 my-4;
+    @apply border-l-4 border-accent italic pl-4 my-2;
   }
 
   code {
@@ -135,8 +137,12 @@ body, html {
     @apply my-2;
   }
 
+  code {
+    @apply inline-block my-1 max-w-full;
+  }
+
   pre {
-    @apply bg-code rounded my-2 whitespace-pre-wrap break-words max-w-64 xs:max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-3xl 2xl:max-w-5xl
+    @apply bg-code rounded my-2 whitespace-pre-wrap max-w-64 xs:max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-3xl 2xl:max-w-5xl
   }
 
   strong {
