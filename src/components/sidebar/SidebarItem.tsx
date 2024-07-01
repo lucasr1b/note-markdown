@@ -6,9 +6,10 @@ type SidebarItemProps = {
   note: Note;
   deleteNote: (e: React.MouseEvent, id: string) => void;
   getSelectedNoteId: () => string;
+  isMobileNavOpened?: boolean;
 };
 
-const SidebarItem = ({ note, deleteNote, getSelectedNoteId }: SidebarItemProps) => {
+const SidebarItem = ({ note, deleteNote, getSelectedNoteId, isMobileNavOpened }: SidebarItemProps) => {
   const selectedNoteId = getSelectedNoteId();
   const isWelcomeNote = selectedNoteId === '' && note._id === '1';
   const isActive = selectedNoteId === note._id || isWelcomeNote;
@@ -22,11 +23,17 @@ const SidebarItem = ({ note, deleteNote, getSelectedNoteId }: SidebarItemProps) 
       </li>
     ) : (
       <li key={note._id}>
-        <Link className={`flex justify-between items-center h-10 group ${isActive ? 'active' : ''}`} href={`/notes/${note._id}`}>
-          <span className='overflow-hidden text-ellipsis whitespace-nowrap w-72 md:w-36'>{note.title}</span>
-          <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
-            <TrashIcon className='w-4 h-4 text-white opacity-75' />
-          </div>
+        <Link className={`flex justify-between items-center h-10 w-full group ${isActive ? 'active' : ''}`} href={`/notes/${note._id}`}>
+          <span className='overflow-hidden text-ellipsis whitespace-nowrap w-56 xs:w-72 sm:w-96 md:w-36'>{note.title}</span>
+          {isMobileNavOpened ? (
+            <div className='p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
+              <TrashIcon className='w-4 h-4 text-white opacity-75' />
+            </div>
+          ) : (
+            <div className='hidden group-hover:block p-1 rounded hover:bg-code' onClick={(e) => deleteNote(e, note._id)}>
+              <TrashIcon className='w-4 h-4 text-white opacity-75' />
+            </div>
+          )}
         </Link>
       </li>
     )

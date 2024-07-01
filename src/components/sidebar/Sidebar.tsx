@@ -110,7 +110,7 @@ const Sidebar = (props: SidebarProps) => {
       ) : (
         <div className='overflow-y-auto flex flex-col flex-1 gap-1'>
           {notes.map((note) => (
-            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
+            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} isMobileNavOpened={props.isMobileNavOpened} />
           ))}
         </div>
       )}
