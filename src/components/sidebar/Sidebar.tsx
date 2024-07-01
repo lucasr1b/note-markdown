@@ -4,14 +4,19 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useNotes } from '@/context/NotesContext';
 import SidebarItem from './SidebarItem';
-import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, EnvelopeIcon } from '@heroicons/react/16/solid';
+import { ArrowRightStartOnRectangleIcon, DocumentPlusIcon, EnvelopeIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import { logout } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
 import { usePathname } from 'next/navigation';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 
-const Sidebar = () => {
+type SidebarProps = {
+  isMobileNavOpened?: boolean;
+  closeMobileNav?: () => void;
+}
+
+const Sidebar = (props: SidebarProps) => {
   const { notes, setNotes, notesLoading } = useNotes();
   const { session, setSession, sessionLoading } = useSession();
   const { push } = useRouter();
@@ -60,10 +65,19 @@ const Sidebar = () => {
 
   return (
     <ul className='menu fixed w-full md:w-60 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
-      <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
-        NoteMarkdown
-      </Link>
-      <button className='btn btn-sm h-10 btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
+      {props.isMobileNavOpened ? (
+        <div className='flex items-center justify-between px-1'>
+          <Link className='my-2 font-bold text-2xl' href={'/'}>
+            NoteMarkdown
+          </Link>
+          <div onClick={props.closeMobileNav}><XMarkIcon className='w-8 h-8' /></div>
+        </div>
+      ) : (
+        <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
+          NoteMarkdown
+        </Link>
+      )}
+      <button className='btn btn-sm h-10 w-full btn-neutral shadow-md mt-2 mb-8 no-animation focus:outline-none' onClick={newNote}>
         <DocumentPlusIcon className='w-5 h-5' />
         Create new note
       </button>
@@ -96,7 +110,7 @@ const Sidebar = () => {
       ) : (
         <div className='overflow-y-auto flex flex-col flex-1 gap-1'>
           {notes.map((note) => (
-            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
+            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} isMobileNavOpened={props.isMobileNavOpened} />
           ))}
         </div>
       )}
@@ -108,10 +122,12 @@ const Sidebar = () => {
               <span className='font-semibold whitespace-nowrap overflow-hidden text-ellipsis'>{session.email}</span>
             </div>
             {logOutLoading ? (
-              <span className='loading loading-spinner loading-xs mr-2'></span>
+              <span className='loading loading-spinner loading-sm md:loading-xs mr-2'></span>
             ) : (
               <form action={handleLogout}>
-                <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'><ArrowRightStartOnRectangleIcon className='w-4 h-4 text-red-500' /></button>
+                <button className='flex items-center justify-center p-1 rounded hover:bg-code hover:cursor-pointer'>
+                  <ArrowRightStartOnRectangleIcon className='w-5 h-5 sm:w-4 md:h-4 text-red-500' />
+                </button>
               </form>
             )}
           </div>

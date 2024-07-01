@@ -14,6 +14,8 @@ type NoteProps = {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+  isMobileNavOpened?: boolean;
+  isMobileView?: boolean;
   isLoading: boolean;
 };
 
@@ -36,36 +38,37 @@ const NoteItem = (props: NoteProps) => {
 
   return (
     <div className='md:ml-56 flex-1 flex flex-col p-2'>
-      <div className='sticky top-0 bg-base-300 flex justify-end w-full px-4 py-2 z-10'>
-        {!props.isLoading && !sessionLoading && (
-          props.id === '1' ? (
-            <div className='relative flex items-center'>
-              <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
+      {!props.isMobileNavOpened && (
+        <div className='sticky top-14 bg-base-300 flex justify-end w-full px-2 py-2 z-10 md:top-0 md:px-4'>
+          {!props.isLoading && !sessionLoading && (
+            props.id === '1' ? (
+              <div className='relative flex items-center'>
+                <label className={`swap swap-rotate rounded p-2 ${props.isMobileView ? 'bg-neutral' : 'hover:bg-neutral'}`}>
+                  <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
+                  <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
+                  <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
+                </label>
+                <div className='custom-tooltip shiny hidden xs:block'>
+                  {isEditingMode ? 'Click the book to switch to Displaying!' : 'Click the pencil to switch to Editing!'}
+                </div>
+              </div>
+            ) : editPermission ? (
+              <label className={`swap swap-rotate rounded p-2 ${props.isMobileView ? 'bg-neutral' : 'hover:bg-neutral'}`}>
                 <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
                 <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
                 <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
               </label>
-              <div className='custom-tooltip shiny'>
-                {isEditingMode ? 'Click the book to switch to Displaying!' : 'Click the pencil to switch to Editing!'}
+            ) : (
+              <div className='relative flex items-center'>
+                <div className={`p-2  ${props.isMobileView ? 'bg-neutral rounded opacity-50' : 'opacity-50'}`}><PencilIcon className='h-5 w-5' /></div>
+                <div className='custom-tooltip hidden xs:block'>
+                  You do not have permission to edit this note.
+                </div>
               </div>
-            </div>
-          ) : editPermission ? (
-            <label className='swap swap-rotate rounded p-2 hover:bg-neutral'>
-              <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
-              <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
-              <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
-            </label>
-          ) : (
-            <div className='relative flex items-center'>
-              <div className='p-2 opacity-50'><PencilIcon className='h-5 w-5' /></div>
-              <div className='custom-tooltip'>
-                You do not have permission to edit this note.
-              </div>
-            </div>
-          )
-        )}
-      </div>
-      <div className='flex flex-col px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-4 md:py-8 lg:py-16 xl:py-24 2xl:py-32'>
+            )
+          )}
+        </div>)}
+      <div className='flex flex-col px-4 md:px-10 lg:px-16 xl:px-24 2xl:px-32 py-4 md:py-8 lg:py-16 xl:py-24 2xl:py-32'>
         {props.isLoading ? (
           <div>
             <div className='animate-pulse h-10 w-1/3 bg-neutral rounded'></div>

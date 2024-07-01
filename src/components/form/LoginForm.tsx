@@ -40,7 +40,7 @@ const LoginForm = () => {
           <Image src={'/image.png'} width={20} height={20} alt={'Google'} /> LOG IN WITH GOOGLE
         </button>
       </form> */}
-      <form className='flex flex-col w-1/3 gap-2' onSubmit={handleLogin}>
+      <form className='flex flex-col w-3/4 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 gap-2' onSubmit={handleLogin}>
         <label className='text-sm'>Email</label>
         <input
           name='email'
@@ -62,18 +62,16 @@ const LoginForm = () => {
         {loading ? (
           <button
             type='button'
-            className={`btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-75`}>
+            className='btn btn-sm h-12 bg-primary shadow-md mt-2 no-animation w-full cursor-default hover:bg-primary opacity-75'>
             <span className='loading loading-spinner loading-md'></span>
           </button>
         ) : (
           <button
             type='submit'
-            className={`btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full`}
-          >
+            className='btn btn-sm h-12 btn-primary shadow-md mt-2 no-animation w-full'>
             LOG IN
           </button>
         )}
-
       </form>
     </div>
   );

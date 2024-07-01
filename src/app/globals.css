@@ -132,7 +132,7 @@ body, html {
   }
 
   pre {
-    @apply bg-code rounded my-2 whitespace-pre-wrap break-words sm:max-w-md md:max-w-md lg:max-w-xl xl:max-w-3xl 2xl:max-w-6xl
+    @apply bg-code rounded my-2 whitespace-pre-wrap break-words max-w-64 xs:max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-3xl 2xl:max-w-5xl
   }
 
   strong {
@@ -157,6 +157,6 @@ body, html {
   }
 
   img {
-    @apply w-auto h-auto max-w-md my-4;
+    @apply w-auto h-auto max-w-64 xs:max-w-80 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-3xl my-4;
   }
 }

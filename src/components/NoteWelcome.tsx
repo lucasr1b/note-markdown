@@ -5,8 +5,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNotes } from '@/context/NotesContext';
 import welcomeNote from '@/utils/welcomeNote';
+import MobileNav from './MobileNav';
 
-const NoteWelcome = () => {
+type NoteWelcomeProps = {
+  isMobileNavOpened: boolean;
+}
+
+const NoteWelcome = (props: NoteWelcomeProps) => {
   const { notes, setNotes } = useNotes();
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState('');
@@ -27,8 +32,7 @@ const NoteWelcome = () => {
 
   return (
     <main className='flex min-h-screen bg-base-300 w-full'>
-      <Sidebar />
-      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isLoading={isLoading} />
+      <NoteItem id={welcomeNote._id} content={content} setContent={setContent} title={title} setTitle={setTitle} setNotes={setNotes} isMobileNavOpened={props.isMobileNavOpened} isLoading={isLoading} />
     </main>
   );
 };

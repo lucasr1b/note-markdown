@@ -22,7 +22,7 @@ const LoginPage = () => {
   return (
     <div className='relative h-screen'>
       <Link className='absolute top-0 left-0 p-4' href={'/'}>
-        <h1 className='text-2xl font-bold'>NoteMarkdown</h1>
+        <h1 className='text-xl font-bold sm:text-2xl'>NoteMarkdown</h1>
       </Link>
       <div className='bg-base-300 flex flex-col items-center justify-center h-full'>
         <h1 className='text-4xl font-extrabold mb-6'>Welcome back!</h1>
