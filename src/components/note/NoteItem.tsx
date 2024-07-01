@@ -37,7 +37,7 @@ const NoteItem = (props: NoteProps) => {
   }, [props.id, session, props.userId]);
 
   return (
-    <div className='md:ml-56 flex-1 flex flex-col p-2'>
+    <div className='md:ml-60 flex-1 flex flex-col p-2'>
       {!props.isMobileNavOpened && (
         <div className='sticky top-14 bg-base-300 flex justify-end w-full px-2 py-2 z-10 md:top-0 md:px-4'>
           {!props.isLoading && !sessionLoading && (
