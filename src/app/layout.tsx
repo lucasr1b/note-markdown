@@ -1,4 +1,5 @@
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
 import { NotesProvider } from '@/context/NotesContext';
@@ -52,6 +53,7 @@ export default function RootLayout({
           </NotesProvider>
         </SessionProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
