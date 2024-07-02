@@ -1,3 +1,4 @@
+import { useMobileView } from '@/context/MobileViewContext';
 import { Note } from '@/utils/types';
 import { TrashIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
@@ -6,13 +7,14 @@ type SidebarItemProps = {
   note: Note;
   deleteNote: (e: React.MouseEvent, id: string) => void;
   getSelectedNoteId: () => string;
-  isMobileNavOpened?: boolean;
 };
 
-const SidebarItem = ({ note, deleteNote, getSelectedNoteId, isMobileNavOpened }: SidebarItemProps) => {
+const SidebarItem = ({ note, deleteNote, getSelectedNoteId }: SidebarItemProps) => {
   const selectedNoteId = getSelectedNoteId();
   const isWelcomeNote = selectedNoteId === '' && note._id === '1';
   const isActive = selectedNoteId === note._id || isWelcomeNote;
+
+  const { isMobileNavOpened } = useMobileView();
 
   return (
     note._id === '1' ? (

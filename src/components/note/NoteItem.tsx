@@ -5,6 +5,7 @@ import NoteDisplay from './NoteDisplay';
 import NoteEditor from './NoteEditor';
 import { Note } from '@/utils/types';
 import { useSession } from '@/context/SessionContext';
+import { useMobileView } from '@/context/MobileViewContext';
 
 type NoteProps = {
   id: string;
@@ -14,16 +15,15 @@ type NoteProps = {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
-  isMobileNavOpened?: boolean;
-  isMobileView?: boolean;
   isLoading: boolean;
 };
 
 const NoteItem = (props: NoteProps) => {
+  const { session, sessionLoading } = useSession();
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [editPermission, setEditPermission] = useState(false);
 
-  const { session, sessionLoading } = useSession();
+  const { isMobileView, isMobileNavOpened } = useMobileView();
 
   useEffect(() => {
     if (session && session.email === props.userId) {
@@ -38,12 +38,12 @@ const NoteItem = (props: NoteProps) => {
 
   return (
     <div className='md:ml-60 flex-1 flex flex-col p-2'>
-      {!props.isMobileNavOpened && (
+      {!isMobileNavOpened && (
         <div className='sticky top-14 bg-base-300 flex justify-end w-full px-2 py-2 z-10 md:top-0 md:px-4'>
           {!props.isLoading && !sessionLoading && (
             props.id === '1' ? (
               <div className='relative flex items-center'>
-                <label className={`swap swap-rotate rounded p-2 ${props.isMobileView ? 'bg-neutral' : 'hover:bg-neutral'}`}>
+                <label className={`swap swap-rotate rounded p-2 ${isMobileView ? 'bg-neutral' : 'hover:bg-neutral'}`}>
                   <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
                   <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
                   <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
@@ -53,14 +53,14 @@ const NoteItem = (props: NoteProps) => {
                 </div>
               </div>
             ) : editPermission ? (
-              <label className={`swap swap-rotate rounded p-2 ${props.isMobileView ? 'bg-neutral' : 'hover:bg-neutral'}`}>
+              <label className={`swap swap-rotate rounded p-2 ${isMobileView ? 'bg-neutral' : 'hover:bg-neutral'}`}>
                 <input type='checkbox' onChange={() => setIsEditingMode(!isEditingMode)} />
                 <div className='swap-on'><BookOpenIcon className='h-5 w-5' /></div>
                 <div className='swap-off'><PencilIcon className='h-5 w-5' /></div>
               </label>
             ) : (
               <div className='relative flex items-center'>
-                <div className={`p-2  ${props.isMobileView ? 'bg-neutral rounded opacity-50' : 'opacity-50'}`}><PencilIcon className='h-5 w-5' /></div>
+                <div className={`p-2  ${isMobileView ? 'bg-neutral rounded opacity-50' : 'opacity-50'}`}><PencilIcon className='h-5 w-5' /></div>
                 <div className='custom-tooltip hidden xs:block'>
                   You do not have permission to edit this note.
                 </div>

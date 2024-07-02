@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 import { Note } from '@/utils/types';
 import { useSession } from './SessionContext';
@@ -13,7 +13,7 @@ type NotesContextType = {
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
 
-export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const NotesProvider = ({ children }: { children: ReactNode }) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [notesLoading, setNotesLoading] = useState(true);
   const { session, sessionLoading } = useSession();
@@ -47,7 +47,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
-export const useNotes = (): NotesContextType => {
+export const useNotes = () => {
   const context = useContext(NotesContext);
   if (!context) {
     throw new Error('useNotes must be used within a NotesProvider');

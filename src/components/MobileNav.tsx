@@ -1,14 +1,13 @@
 'use client';
+import { useMobileView } from '@/context/MobileViewContext';
 import { useSession } from '@/context/SessionContext';
 import { Bars3Icon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 
-type MobileNavProps = {
-  toggleNav: () => void;
-};
-
-const MobileNav = ({ toggleNav }: MobileNavProps) => {
+const MobileNav = () => {
   const { session, sessionLoading } = useSession();
+
+  const { openMobileNav } = useMobileView();
 
   return (
     <div className='w-full sticky top-0 flex items-center bg-neutral py-2 px-4 z-50'>
@@ -19,7 +18,7 @@ const MobileNav = ({ toggleNav }: MobileNavProps) => {
       <div className='ml-auto'>
         {!sessionLoading && (
           session && session.isLoggedIn ? (
-            <Bars3Icon className='h-6 w-6 cursor-pointer' onClick={toggleNav} />
+            <Bars3Icon className='h-6 w-6 cursor-pointer' onClick={openMobileNav} />
           ) : (
             <Link className='btn btn-sm h-10 px-4 btn-primary no-animation' href='/signup'>
               Sign up

@@ -3,6 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
 import { NotesProvider } from '@/context/NotesContext';
+import { MobileViewProvider } from '@/context/MobileViewContext';
 import { SessionProvider } from '@/context/SessionContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -43,14 +44,16 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <SessionProvider>
-          <NotesProvider>
-            {children}
-            <ToastContainer
-              position='bottom-right'
-              autoClose={2500}
-              theme='dark'
-            />
-          </NotesProvider>
+          <MobileViewProvider>
+            <NotesProvider>
+              {children}
+              <ToastContainer
+                position='bottom-right'
+                autoClose={2500}
+                theme='dark'
+              />
+            </NotesProvider>
+          </MobileViewProvider>
         </SessionProvider>
         <Analytics />
         <SpeedInsights />

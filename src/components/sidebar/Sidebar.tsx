@@ -9,20 +9,18 @@ import { logout } from '@/actions/session';
 import { useSession } from '@/context/SessionContext';
 import { usePathname } from 'next/navigation';
 import { useRef, useState } from 'react';
-import Image from 'next/image';
+import { useMobileView } from '@/context/MobileViewContext';
 
-type SidebarProps = {
-  isMobileNavOpened?: boolean;
-  closeMobileNav?: () => void;
-}
-
-const Sidebar = (props: SidebarProps) => {
-  const { notes, setNotes, notesLoading } = useNotes();
+const Sidebar = () => {
   const { session, setSession, sessionLoading } = useSession();
+  const [logOutLoading, setLogOutLoading] = useState(false);
+
   const { push } = useRouter();
   const pathName = usePathname();
 
-  const [logOutLoading, setLogOutLoading] = useState(false);
+  const { notes, setNotes, notesLoading } = useNotes();
+
+  const { isMobileNavOpened, closeMobileNav } = useMobileView();
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -65,12 +63,12 @@ const Sidebar = (props: SidebarProps) => {
 
   return (
     <ul className='menu fixed w-full md:w-60 h-full bg-base-200 border-r-2 border-base-100 gap-1'>
-      {props.isMobileNavOpened ? (
+      {isMobileNavOpened ? (
         <div className='flex items-center justify-between px-1'>
           <Link className='my-2 font-bold text-2xl' href={'/'}>
             NoteMarkdown
           </Link>
-          <div onClick={props.closeMobileNav}><XMarkIcon className='w-8 h-8' /></div>
+          <div onClick={closeMobileNav}><XMarkIcon className='w-8 h-8' /></div>
         </div>
       ) : (
         <Link className='my-2 font-bold text-2xl text-center' href={'/'}>
@@ -110,7 +108,7 @@ const Sidebar = (props: SidebarProps) => {
       ) : (
         <div className='overflow-y-auto flex flex-col flex-1 gap-1'>
           {notes.map((note) => (
-            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} isMobileNavOpened={props.isMobileNavOpened} />
+            <SidebarItem key={note._id} note={note} deleteNote={deleteNote} getSelectedNoteId={getSelectedNoteId} />
           ))}
         </div>
       )}
