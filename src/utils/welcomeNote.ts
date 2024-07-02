@@ -5,7 +5,7 @@ const welcomeNote: Note = {
     title: 'Welcome',
     content: `Discover the features of NoteMarkdown, **your ultimate yet simple markdown editor**.
 
-**[Sign up](/signup)** to create new notes and **save your changes**.
+**[Sign up](/signup)** for free to **save your changes and create new notes**.
 
 *Click the **pencil icon** on the top right corner to start editing this note.*
 ***
