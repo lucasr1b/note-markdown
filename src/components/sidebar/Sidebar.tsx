@@ -131,7 +131,7 @@ const Sidebar = () => {
           </div>
         ) : (
           <>
-            <span className='mb-6 text-center'>Sign up now for free to save your changes and create new notes.</span>
+            <span className='mb-6 text-center'>Sign up to <span className='font-semibold'>save your changes</span> and <span className='font-semibold'>create new notes</span>.</span>
             <div className='flex flex-col gap-2 mt-auto mb-4'>
               <Link className='btn btn-sm h-10 btn-primary no-animation' href={'/signup'}>
                 Sign up
