@@ -130,14 +130,17 @@ const Sidebar = () => {
             )}
           </div>
         ) : (
-          <div className='flex flex-col gap-2 mt-auto mb-4'>
-            <Link className='btn btn-sm h-10 btn-primary no-animation' href={'/signup'}>
-              Sign up
-            </Link>
-            <Link className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral' href={'/login'}>
-              Log in
-            </Link>
-          </div>
+          <>
+            <span className='mb-6 text-center'>Sign up now for free to save your changes and create new notes.</span>
+            <div className='flex flex-col gap-2 mt-auto mb-4'>
+              <Link className='btn btn-sm h-10 btn-primary no-animation' href={'/signup'}>
+                Sign up
+              </Link>
+              <Link className='btn btn-sm h-10 border-neutral no-animation hover:bg-neutral hover:border-neutral' href={'/login'}>
+                Log in
+              </Link>
+            </div>
+          </>
         )
       )}
     </ul>
